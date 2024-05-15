@@ -1,0 +1,145 @@
+.back_icon {
+  color: #fff !important;
+}
+
+.icon_right {
+  color: #fff !important;
+}
+
+.search_sect {
+  margin-bottom: 0px;
+  --padding-start: 0px !important;
+  --inner-padding-end: 0px !important;
+}
+
+.search_phrases {
+  margin-top: 2%;
+  --border-radius: 10px;
+  /* --border: 2px solid blue; */
+  --box-shadow: 0px 0px 10px rgb(0 0 0 / 20%) !important;
+  /* border-color: blueviolet; */
+  width: 100%;
+  padding-inline-start: 10px !important;
+  padding-inline-end: 10px !important;
+  --padding-start: 0px !important;
+  --inner-padding-end: 0px !important;
+}
+.header_label {
+  line-height: 32px;
+  background: #f4f4f4 !important;
+  width: 100%;
+  color: #666666;
+  margin-top: 15px;
+}
+ion-card.danger {
+  //   border-top:  4px solid #FF3535;
+  border-top: 4px solid #f96363;
+}
+.label_section_date {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-family: "Poppins";
+  margin-left: 20px;
+}
+
+.main_sec {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+}
+
+.time_sec {
+  display: flex;
+  flex-direction: column;
+  --background-color: none;
+
+  border-radius: 2px;
+}
+.date_sec {
+  // display: flex;
+  // flex-direction: column;
+  // min-width: 73%;
+  // border-left: 2px solid #ABB2BC;
+  // padding-left: 15px;
+  // margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  min-width: 90%;
+  max-width: 90%;
+
+  padding-left: 15px;
+}
+.no_jobs{
+  position: absolute;
+  top: 50%;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  font-family: 'Poppins' !important;
+  background: #fff;
+  color: #000;
+}
+.item_sec {
+  width: 100%;
+  --inner-border-width: 0;
+  // transform: translate3d(-69px, 0px, 0px);
+}
+.swap_card_sec {
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-top: 18px;
+  margin-inline: 16px;
+}
+
+.label_date_text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #265cb2;
+  padding-bottom: 4px;
+  font-family: "Poppins";
+}
+
+.text_time {
+  font-weight: 700;
+  color: #333;
+  font-size: 12px !important;
+}
+
+.date_cldout {
+  display: flex;
+  align-items: center;
+}
+.day_text {
+  margin-left: 5px;
+  font-size: 12px;
+}
+.cld-icons {
+  font-size: 16px;
+  color: #265cb2;
+}
+.text_time.btmsppace {
+  padding-bottom: 4px;
+}
+.arrow_sec{
+  font-size: 24px;
+  font-weight: 600;
+  // color: #84CC26;
+  color: #265CB2;
+}
+
+.punchLocation{
+  font-size: 24px;
+  font-weight: 600;
+  color: #9c9ea0 !important;
+}
+
+.icons{
+  color: black !important;
+  display: flex;
+  justify-content: end;
+  font-size: 28px;
+}

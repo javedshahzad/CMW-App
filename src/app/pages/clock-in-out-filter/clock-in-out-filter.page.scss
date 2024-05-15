@@ -1,0 +1,111 @@
+.back_icon {
+    color: #fff !important;
+  }
+  
+  .icon_right {
+    color: #fff !important;
+  }
+  .header_label {
+    line-height: 32px;
+    background: #f4f4f4 !important;
+    width: 100%;
+    color: #666666;
+    margin-top: 15px;
+  }
+  ion-card.danger {
+    //   border-top:  4px solid #FF3535;
+    border-top: 4px solid #f96363;
+  }
+  .label_section_date {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-family: "Poppins";
+    margin-left: 20px;
+  }
+  
+  .main_sec {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+  }
+
+  ion-item.popup_inputs {
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 8px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+  }
+
+  .save_button {
+    --background: #265cb2;
+    --border-radius: 50px;
+    width: 80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    margin-left: 54%;
+    color:  #f8fafc;
+  }
+  
+  .outline-button {
+    --border-color: #265cb2;
+  }
+  
+  .btn_sec {
+    margin-top: 1%;
+  }
+
+  .save_btn {
+    margin-right: 10px;
+  }
+
+  .custom_inp{
+    outline: none;
+    border: none;
+    color: black !important;
+    width: 100% !important;
+    background: #fff;
+}
+
+.cancel_button{
+  --background: #f8fafc;
+  --border-radius: 50px;
+  color:  #265CB2;
+  width:80px;
+  height: 27px;
+  font-weight: 500;
+  font-family: "Poppins";
+  font-size: 12px;
+  text-transform: none;
+}
+
+ion-select {
+  width: 100%;
+ // text-align: center;
+  font-size: 12px;
+  font-family: "Poppins";
+  margin-left: 20px;
+}
+::ng-deep .sc-ion-modal-md-h{
+  --backdrop-opacity: 0.5;
+  --background: var(--ion-background-color, transparent);
+}
+::ng-deep .sc-ion-modal-md-h:first-of-type {
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.70);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+  
+  .mains{
+    margin-bottom: 5px;
+  }
+ 
+}

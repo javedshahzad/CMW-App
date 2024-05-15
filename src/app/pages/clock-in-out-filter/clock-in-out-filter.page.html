@@ -1,0 +1,82 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="end" (click)="goBack()">
+      <ion-button>
+        <ion-icon class="back_icon" name="close-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header"> Clock In Out Filter </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item class="popup_inputs" lines="none">
+      <input
+        type="text"
+        class="login_input custom_inp"
+        #punchInDate
+        name="startDate"
+        placeholder="Start Date"
+        bsDatepicker
+        [bsConfig]="bsConfig"
+        (bsValueChange)="startWorkDateChange($event)"
+        (onShown)="hideKey()"
+        autocomplete="off"
+      />
+    </ion-item>
+    <ion-item class="popup_inputs" lines="none">
+      <input
+        type="text"
+        class="login_input custom_inp"
+        #punchEndDate
+        name="endDate"
+        placeholder="End Date"
+        bsDatepicker
+        [bsConfig]="bsConfig"
+        (bsValueChange)="endWorkDateChange($event)"
+        (onShown)="hideKey()"
+        autocomplete="off"
+      />
+    </ion-item>
+    <ion-item class="popup_inputs" lines="none">
+      <ion-select
+        class="select_company"
+        
+        placeholder="Select a compliance"
+        #complianceValue
+        (change)="complianceChange($event)"
+      >
+        <ion-select-option
+          *ngFor="let compliance of complianceList"
+          [value]="compliance.id"
+        >
+          {{compliance.value}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-row class="btn_sec">
+      <ion-col col-md-4>
+        <div class="button_section save_btn">
+          <ion-button
+            class="save_button outline-button"
+            fill="outline"
+            (click)="filterData()"
+            >Search</ion-button
+          >
+        </div>
+      </ion-col>
+      <ion-col col-md-4>
+        <div class="button_section cncl_btn">
+          <ion-button
+            class="cancel_button outline-button"
+            fill="outline"
+            (click)="clear()"
+            >Clear</ion-button
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>

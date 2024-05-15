@@ -1,0 +1,82 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-title class="title_header">
+      Submit your feedback
+    </ion-title>
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main_sec" no-bounce>
+    <div class="form">
+      <form [formGroup]="feedbackForm" class="list-form">
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Issue Type</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-select formControlName="Subject">
+            <ion-select-option disabled value="">Select an option
+            </ion-select-option>
+            <ion-select-option *ngFor="let item of feedbackType" value="{{item.id}}">
+              {{ item.value }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="feedbackForm.controls['Subject']" [messages]="messageList.Subject">
+        </app-validation-message>
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Description</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs">
+          <ion-input formControlName="Body">
+          </ion-input>
+        </ion-item>
+        <ion-row lines="none">
+          <app-validation-message class="validation_txt" [control]="feedbackForm.controls['Body']" [messages]="messageList.Body">
+          </app-validation-message>
+        </ion-row>
+        
+        <input #myFileInput class="ion-hide" accept="image/*, video/*, application/pdf,.docx, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" 
+        #f type="file" (change)="onFileChange($event)" id="file_input_btn">
+      </form>
+    </div>
+
+    <ion-row>
+      <div>
+        <ion-item lines="none">
+          <ion-row>
+            <div *ngIf="fileObj.length > 0">
+              <div *ngFor="let item of fileObj;let i = index">
+                <ion-chip *ngIf="fileObj.length > 0" color="tertiary">
+                  <ion-text class="ion-text-wrap">{{(item.FileName.length > 35)? (item.FileName | slice:0:35)+'...':(item.FileName)}}</ion-text>
+                  <ion-icon (click)="removeFile(i)" name="close"></ion-icon>
+                </ion-chip>
+              </div>
+            </div>
+          </ion-row>
+        </ion-item>
+      </div>
+    </ion-row>
+
+    <div class="btn_sec">
+      <div>
+        <ion-item class="button_section" lines="none">
+          <ion-button size="default" expand="block" class="file_btn" (click)="f.click()">
+            Choose a file
+          </ion-button>
+        </ion-item>
+      </div>
+      <div class="button_section save_btn">
+        <ion-button size="default" class="save_button" (click)="onSave()">
+          <ion-icon class="save_icon" name="save-outline"></ion-icon>Submit
+        </ion-button>
+      </div>
+    </div>
+    <ion-label class="fixed-content">Selected files shouldn't be more than 5 MB.</ion-label>
+  </div>
+</ion-content>

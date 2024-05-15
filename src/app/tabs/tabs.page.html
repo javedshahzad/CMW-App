@@ -1,0 +1,16 @@
+<ion-tabs  #tabs (ionTabsDidChange)="tabChange(tabs)">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="{{role === roleEnum.hrAdmin ? 'pending-requests': 'available-requests' }}" class="tabs_section_main" [style]="selectedtab=='available_request' || selectedtab=='pending-requests' ?{'--color': footerSelectedIconClr} : {'--color':footerUnselectedIconClr,'--color-selected': footerSelectedIconClr}">
+      <ion-icon [src]="usersIcon"></ion-icon>
+      <ion-label class="lable_tabs" *ngIf="role === roleEnum.manager || role === roleEnum.user">{{role === roleEnum.manager ? 'Pending Requests' : 'Available offers'}}</ion-label>
+      <ion-label class="lable_tabs" *ngIf="role === roleEnum.hrAdmin ">Pending Requests</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="{{role === roleEnum.hrAdmin ? 'closed-requests': 'my-requests' }}" class="tabs_section_main my_requests" [style]="selectedtab==' my_request' || selectedtab=='closed-requests'  ?{'--color': footerSelectedIconClr} : {'--color':footerUnselectedIconClr,'--color-selected': footerSelectedIconClr}">
+      <ion-icon [src]="calendarIcon"></ion-icon>
+      <ion-label class="lable_tabs" *ngIf="role === roleEnum.manager || role === roleEnum.user">{{role === roleEnum.manager ? 'Closed Requests' : 'My Requests'}}</ion-label>
+      <ion-label class="lable_tabs" *ngIf="role === roleEnum.hrAdmin">Closed Requests</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

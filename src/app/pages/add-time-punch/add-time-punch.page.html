@@ -1,0 +1,73 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-title class="title_header" *ngIf="!Offer">
+      Add Time Punch
+    </ion-title>
+    <ion-title class="title_header" *ngIf="Offer">
+      Edit Time Punch
+    </ion-title>
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content">
+  <div class="main_sec" no-bounce>
+    <div class="form">
+      <form [formGroup]="offerForm" class="list-form" *ngIf="offerForm">
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Punch Time</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-datetime [formControl]="offerForm.controls['PunchTime']" name="endDate" placeholder="MM/DD/YYYY HH:mm"
+            displayFormat="MM/DD/YYYY, hh:mm A" (ionChange)="onTimeChange($event)" (onShown)="hideKey()"
+            class="login_input custom_inp"></ion-datetime>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['PunchTime']" [messages]="messageList.PunchTime">
+        </app-validation-message>
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Punch Type</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-select formControlName="PunchType" (ionChange)="onDetectChange()">
+            <ion-select-option disabled value="">Select Punch Type
+            </ion-select-option>
+            <ion-select-option *ngFor="let list of punchTypeList" [value]="list.id">
+              {{list.value}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['PunchType']" [messages]="messageList.PunchType">
+        </app-validation-message>
+        <div *ngIf="noChangeTimeDetect || noChangeDetect">
+          <ion-item lines="none" class="popoup_label">
+            <ion-label>Reason</ion-label>
+          </ion-item>
+          <ion-item class="popup_inputs">
+            <ion-input formControlName="reason">
+            </ion-input>
+          </ion-item>
+        </div>
+        <app-validation-message [control]="offerForm.controls['reason']" [messages]="messageList.Reason">
+        </app-validation-message>
+      </form>
+    </div>
+    <hr>
+    <ion-row class="btn_sec" *ngIf="offerForm">
+      <ion-col col-md-4>
+        <div class="button_section save_btn">
+          <ion-button class="save_button" (click)="onSubmit()">Request</ion-button>
+        </div>
+      </ion-col>
+      <ion-col col-md-4>
+        <div class="button_section cncl_btn">
+          <ion-button class="cancel_button outline-button" fill="outline" (click)="closeModal()">Cancel</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

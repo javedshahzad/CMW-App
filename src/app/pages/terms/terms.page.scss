@@ -1,0 +1,48 @@
+.main_sec{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6% !important;
+}
+
+ion-select{
+    --padding-start:16px !important;
+    font-family: 'Poppins' !important;
+}
+
+.search_head{
+    max-height: 55px !important;
+}
+
+.terms-title{
+    font-family: Poppins !important;
+    font-weight: 600;
+    color: #265CB2 !important;
+    font-size: 14px !important;
+}
+
+.search_head.header-md::after, .menuheader.header-ios::after{ background-image:none; }
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .terms-title{
+        font-size: 25px !important;
+    }
+    .btn_sec{
+        font-size: 25px;
+    }
+    .main_sec{
+        font-size: 21px !important;
+    }
+    
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+    .terms-title{
+        font-size: 25px !important;
+    }
+    .btn_sec{
+        font-size: 25px;
+    }
+    .main_sec{
+        font-size: 21px !important;
+    }
+  
+}

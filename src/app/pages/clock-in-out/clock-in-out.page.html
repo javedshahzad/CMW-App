@@ -1,0 +1,58 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header"> Clock In Out </ion-title>
+    <ion-buttons slot="end" (click)="goToWorkHours();">
+      <ion-button>
+        <ion-icon class="dollar_icon" [src]="dollarIcon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="goToClockInOutHistory();">
+      <ion-button>
+        <ion-icon class="back_icon" name="timer-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <!-- <ion-row>
+      <ion-col size="12" class="column_main lbl_mtr">
+        <ion-label *ngIf="calculateDistantsList" class="text_lbl"
+          >Your location is
+          <span class="text_lbl_mtr">{{calculateDistantsList}}</span>
+          far from company location.</ion-label
+        >
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col size="12" class="column_main lbl_mtr">
+        <ion-label class="text_lbl"
+          >WTD Hours : <span *ngIf="weekHours === null">Loading...</span> <b>{{weekHours}}</b>
+        </ion-label>
+      </ion-col>
+      <ion-col size="12" class="column_main lbl_mtr instuction">
+        <ion-label
+          ><span *ngIf="weekHours !== null">Please ensure that all time punches are accurate.</span
+          ></ion-label
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" class="column_main">
+        <div class="cards_section" (click)="punchTimeClick()">
+          <ion-icon
+            class="card_icon transfer_icon"
+            [src]="clockInOutRequestIcon"
+          ></ion-icon>
+          <ion-label class="text_avl_lbl">Punch Time</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,38 @@
+<div class="approve_reject_modal">
+  <div class="modal-header">
+      <h4 class="modal-title pull-left text-sizd">{{type | uppercase}} VOT</h4>
+      <button type="button" class="close pull-right" aria-label="Close" [disabled]="!isDisableBtn" (click)="cancel()">
+          <span aria-hidden="true"><ion-icon name="close-circle-outline"></ion-icon></span>
+      </button>
+  </div>
+  <div class="modal-body pb-3 add_approve_reject_popup">
+      <div class="row">
+          <div class="col-12 col-md-12" *ngIf="!IsCoverageCatch">
+              <span>Total {{type}}: {{requestData?.totalApprovals}}</span><br>
+              <span>Full shift: {{requestData?.fullShift}}</span><br>
+              <span>First half: {{requestData?.firstHalf}}</span><br>
+              <span>Second half: {{requestData?.secondHalf}}</span><br>
+              <span>Total hours {{type}}: {{requestData?.totalHoursApproved}}</span><br>
+          </div>
+          <div class="col-12 col-md-12" *ngIf="IsCoverageCatch">
+              <span>Total {{type}}: {{requestData?.totalApprovals}}</span><br>
+              <span>Full shift: {{requestData?.fullShift}}</span><br>
+              <span>First half: {{requestData?.firstHalf}}</span><br>
+              <span>Second half: {{requestData?.secondHalf}}</span><br>
+              <span>Hour Early : {{requestData?.hourEarly}}</span><br>
+              <span>Hour Late: {{requestData?.hourLate}}</span><br>
+              <span>Total hours {{type}}: {{requestData?.totalHoursApproved}}</span><br>
+          </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button type="submit" tabindex="-1" class="btn btn-primary float-left" [disabled]="!isDisableBtn" (click)="approveRejectVot()">
+        <ion-icon name="save-outline"></ion-icon> Submit</button>
+      <button type="button" class="btn btn-primary ml-2" [disabled]="!isDisableBtn" (click)="cancel()">
+          Cancel
+      </button>
+  </div>
+  <div>
+    <ion-label *ngIf="!isDisableBtn" for="username" class="col-12 col-form-label process-btn submit-btn">Processing... </ion-label>
+  </div>
+</div>

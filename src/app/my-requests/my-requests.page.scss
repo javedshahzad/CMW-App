@@ -1,0 +1,108 @@
+
+.card_icon{
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.transfer_icon{
+    color: #000;
+}
+.early_icon{
+    color: #000;
+}
+#cart-btn {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+ }
+ 
+ #cart-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+ }
+.cards_section{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px rgb(0 0 0 / 15%);
+    background: #FFFFFF;
+    margin: 5px 5px 0px 5px; 
+    
+}
+ion-refresher-content {
+    color: #265CB2 !important;
+}
+.text_avl_lbl{
+    font-size: 13px;
+    font-family: Poppins;
+    color:#265CB2 !important;
+    font-weight: 600;
+    text-align: center
+}
+.column_main{
+    padding-right: 0px !important;
+}
+
+.icon_plus {
+    color: #fff !important;
+    font-size: 28px;
+    font-weight: 800;
+    margin-right: 38px;
+  }
+
+
+
+@media (max-width: 575.98px) { 
+    // .text_avl_lbl{
+    //     font-size: 12px;
+        
+    // }
+    .cards_section { padding: 12px;}
+    // .title_header{
+    //     font-size: 14px;
+    // }
+ }
+
+
+ @media only screen 
+ and (min-device-width: 320px) 
+ and (max-device-width: 340px) 
+ {
+   .title_header{
+         font-size: 14px !important;
+     }
+     .text_avl_lbl{
+         font-size: 11px;
+         
+     }
+ }
+ 
+@media (min-width: 768px) and (max-width: 1024px) { 
+
+    .cards_section{
+        min-height: 121px !important;
+    }
+    .transfer_icon{
+        font-size: 40px;
+    }
+    .text_avl_lbl{
+        font-size: 21px;
+    }
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+   
+    .cards_section{
+        min-height: 121px !important;
+    }
+    .transfer_icon{
+        font-size: 35px;
+    }
+    .text_avl_lbl{
+        font-size: 20px;
+    }
+}
+
+
+

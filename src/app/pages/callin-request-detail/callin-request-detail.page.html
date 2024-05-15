@@ -1,0 +1,120 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header">Call-Off Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="CallinData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Call-Off on </ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{CallinData.dateToSkipDateStr}}</span>
+
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Call-Off For</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label"
+              [ngClass]="{reason: CallinData.OtherReason === '' ? CallinData.ReasonObj.name.length>35 : CallinData.OtherReason.length>35 }">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span reason"
+                [ngClass]="{reason: CallinData.OtherReason === '' ? CallinData.ReasonObj.name.length>35 : CallinData.OtherReason.length>35 }">{{CallinData.OtherReason
+                === "" ? CallinData.ReasonObj.name : CallinData.OtherReason}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">HR Call Back</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="call" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{CallinData.IsHRCallBack}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      
+      <ion-item class="popoup_label" *ngIf="CallinData.IsPaidOfftoShow==true">
+        <div class="popup_div">
+          <ion-label class="textlbl">
+            Paid Time Off</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="bookmark" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{CallinData.IsPaidOff}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="CallinData.IsFMLAtoShow==true">
+        <div class="popup_div">
+          <ion-label class="textlbl">FMLA</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="bookmark" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{CallinData.IsFMLA}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="CallinData.status === offerStatus.pendingProceed">
+                {{CallinData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="CallinData.status === offerStatus.proceed">
+                {{CallinData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="CallinData.status === offerStatus.scheduleUpdated">
+                {{CallinData.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="btn_sec" *ngIf="CallinData.status === offerStatus.pendingProceed">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+              <ng-container *ngIf="CallinData.status === offerStatus.pendingProceed">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(CallinData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(CallinData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

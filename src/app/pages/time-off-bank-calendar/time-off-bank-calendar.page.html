@@ -1,0 +1,22 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="title_header">Time Off Bank</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item class="popup_inputs" lines="none">
+    <ion-calendar
+      [options]="optionsMulti"
+      (monthChange)="onMonthChange($event)"
+      [format]="'YYYY-MM-DD'"
+      [readonly]="true"
+    >
+    </ion-calendar>
+  </ion-item>
+</ion-content>

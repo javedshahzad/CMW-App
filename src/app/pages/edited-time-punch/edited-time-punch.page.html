@@ -1,0 +1,86 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-title class="title_header"> Edited Time Punches </ion-title>
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar
+      debounce="500"
+      class="search_phrases"
+      name="filterTextValue"
+      [(ngModel)]="searchfield"
+      (ionChange)="searchRequest($event)"
+    >
+    </ion-searchbar>
+  </ion-item>
+  <ng-container *ngIf="editedPunchesRequestList.length > 0">
+    <ion-item-sliding #slidingItem>
+    <ion-card class="swap_card_sec" *ngFor="let e of editedPunchesRequestList">
+      <div class="main_sec" (click)="goToTimePunchdetail(e)">
+        <div class="time_sec">
+          <h4><b>Edited-Punch</b></h4>
+        </div>
+
+        <div class="date_sec">
+          <ion-label class="label_date_text">
+            <span>{{ e.NewDateStr | date :'MM/dd/yyyy hh:mm a' }}</span>
+          </ion-label>
+
+          <ion-label class="date_cldout">
+            <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.reason}}</span>
+          </ion-label>
+
+          <ion-label
+            class="statusbtns danger"
+            *ngIf="e.status === offerStatus.pendingProceed"
+          >
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+
+          <ion-label
+            class="statusbtns danger"
+            *ngIf="e.status === offerStatus.hrApproval"
+          >
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+
+          <ion-label
+            class="statusbtns success"
+            *ngIf="e.status === offerStatus.proceed"
+          >
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+        </div>
+        <div class="arrow_list_sec">
+          <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+  </ion-item-sliding>
+  </ng-container>
+  <div class="no_jobs" *ngIf="editedPunchesRequestList.length==0">
+    <span>No data Found</span>
+  </div>
+    <ion-infinite-scroll
+    threshold="100px"
+    *ngIf="loadmore==true"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header">Edited Time Punches</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="timePunchdata">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Old Punch</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.OldDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>  
+      </ion-item>
+    
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">New Punch</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.NewDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Old Punch Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.OldPunchTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">New Punch Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.PunchTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Reason</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.reason}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Approved By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.ApprovedByObj?.companyUsername}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Rejected By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timePunchdata.RejectedByObj?.companyUsername}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      
+
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="timePunchdata.status === offerStatus.hrApproval">
+                {{timePunchdata.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl primary" *ngIf="timePunchdata.status === offerStatus.rejected">
+                {{timePunchdata.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="timePunchdata.status === offerStatus.scheduleUpdated">
+                {{timePunchdata.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

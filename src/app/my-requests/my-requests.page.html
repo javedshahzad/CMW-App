@@ -1,0 +1,121 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios"  class="header_sec">
+    <ion-buttons slot="start">
+      <ion-menu-button class="header-icon"  menu="main-menu" autoHide='false'></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title_header" *ngIf="role === roleEnum.user || role === roleEnum.manager">
+      {{role === roleEnum.manager ? 'Closed Requests' : 'My Requests'}}
+    </ion-title>
+    
+    <ion-title class="title_header" *ngIf="role === roleEnum.hrAdmin">
+      Closed Requests
+    </ion-title>
+    <ion-buttons slot="end" (click)="goToFeedback()">
+      <ion-button>
+        <ion-icon class="icon_plus" name="chatbox-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-button class="header-icon" id="cart-btn" (click)="openAnnouncement()">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge id="cart-badge">{{notificationCount}}</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMin="100" pullMax="200">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingSpinner="bubbles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" class="column_main" *ngIf="isShowSwap" (click)="SwapRequests()">
+        <div class="cards_section">
+          <ion-icon class="card_icon transfer_icon" [src]="swapRequestIcon"></ion-icon>
+          <ion-label class="text_avl_lbl">Swap Requests</ion-label>
+        </div>
+      </ion-col>
+      <ng-container *ngIf="isShowVot" >
+        <ion-col size="6" (click)="VOTRequests(2)">
+          <div class="cards_section even">
+            <ion-icon class="card_icon early_icon" [src]="VOTicon"></ion-icon>
+            <ion-label class="text_avl_lbl">VOT requests</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>
+
+      <!-- <ion-col size="6" class="column_main" *ngIf="isShowVTO">
+        <div class="cards_section">
+          <ion-icon class="card_icon transfer_icon" [src]="VTOicon"></ion-icon>
+          <ion-label class="text_avl_lbl">VTO Requests</ion-label>
+        </div>
+      </ion-col> -->
+
+      <ion-col size="6" *ngIf="isShowCallIn"  (click)="openCallinRequests()"> 
+        <div class="cards_section even">
+          <ion-icon class="card_icon early_icon" [src]="callOffIcon"></ion-icon>
+          <ion-label class="text_avl_lbl">Call Off Requests</ion-label>
+        </div>
+      </ion-col>
+
+      <ng-container *ngIf="isShowEarlyOut">
+        <ion-col size="6" class="column_main" (click)="EarlyRequests()">
+          <div class="cards_section">
+            <ion-icon class="card_icon early_icon" [src]="earlyOutIcon"></ion-icon>
+            <ion-label class="text_avl_lbl">Early Out Requests</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>
+
+      <ng-container *ngIf="isShowFlexWork">
+        <ion-col size="6" (click)="FlexRequests()">
+          <div class="cards_section even">
+            <ion-icon class="card_icon transfer_icon" [src]="flexWorkIcon"></ion-icon>
+            <ion-label class="text_avl_lbl">My Flex Work</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>
+
+      <ng-container *ngIf="isShowVTO">
+        <ion-col size="6" (click)="VtoRequests()">
+          <div class="cards_section even">
+            <ion-icon class="card_icon transfer_icon" [src]="VTOicon"></ion-icon>
+            <ion-label class="text_avl_lbl">VTO Requests</ion-label>
+            </div>
+        </ion-col>
+        </ng-container>
+      <ng-container *ngIf="isShowTimeOff">
+        <ion-col size="6" class="column_main" (click)="TimeOffRequests()">
+          <div class="cards_section">
+            <ion-icon class="card_icon early_icon" [src]="timeOffIcon"></ion-icon>
+            <ion-label class="text_avl_lbl">Time-Off Requests</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>
+    
+
+      <ng-container *ngIf="isShowLateIn">
+        <ion-col size="6" (click)="LateInRequests()">
+          <div class="cards_section even">
+            <ion-icon class="card_icon transfer_icon" [src]="lateInIcon"></ion-icon>
+            <ion-label class="text_avl_lbl">Late In Requests</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>
+      <ng-container *ngIf="isShowClockInOut">
+        <ion-col size="6"  (click)="ClockInOut()">
+          <div class="cards_section even">
+            <ion-icon class="card_icon early_icon" [src]="clockInOutIcon"></ion-icon>
+            <ion-label class="text_avl_lbl">Clock In Out Requests</ion-label>
+          </div>
+        </ion-col>
+     </ng-container> 
+     
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

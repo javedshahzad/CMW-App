@@ -1,0 +1,102 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" (click)="openTimeOffRequests('add')">
+      <ion-button>
+        <ion-icon class="icon_plus" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="end" (click)="goToTimeOffBank()">
+      <ion-button>
+        <ion-icon class="icon_plus" name="wallet-outline"></ion-icon>      
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="title_header">Time Off Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar debounce="500" class="search_phrases" name="filterTextValue"  [(ngModel)]="searchfield"  (ionChange)="searchRequest($event)">
+    </ion-searchbar>
+  </ion-item>
+  <ng-container *ngIf="timeOffRequestList.length > 0">
+    <ion-card class="swap_card_sec" *ngFor="let e of timeOffRequestList" [ngClass]="e.statusClass">
+      <div class="main_sec" (click)="goToTimeOffDetail(e)">
+        <div class="status_line" [ngClass]="e.statusClass">
+  
+        </div>
+        <!-- <div class="time_sec">
+          <ion-label *ngIf="e.TimeOffDifference!=null" class="label_date_text">{{ e.TimeOffDifference | slice:0:5 }}</ion-label>
+          <ion-label class="text_time btmsppace" *ngIf="e.TimeOffDifference!=null">
+            Hours
+          </ion-label>
+        
+        </div> -->
+  
+        <div class="date_sec">
+          <ion-label class="label_date_text">
+            <span>{{e.TimeOffConfiguration.Name}}</span>
+  
+  
+          </ion-label>
+  
+        
+          <ion-label class="date_cldout">
+            <ion-icon name="cloud-done" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.TimeOffStartDateStr}}</span>
+          </ion-label>
+          <ion-label class="date_cldout">
+            <ion-icon name="cloud-offline" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.TimeOffEndDateStr}}</span>
+          </ion-label>
+          <ion-label class="date_cldout">
+            <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+            <span class="day_text">- {{ e.totolRequestedHoursStr | slice:0:5 }} Total Hours</span>
+          </ion-label>
+          <ion-label class="date_cldout">
+            <ion-icon name="card" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.NetBalance}}</span>
+          </ion-label>
+          <ion-label class="statusbtns danger" *ngIf="e.Status === offerStatus.pendingProceed || e.Status === offerStatus.rejected">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.StatusStr}}</span>
+          </ion-label>
+  
+          <ion-label class="statusbtns danger" *ngIf="e.Status === offerStatus.hrApproval">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.StatusStr}}</span>
+          </ion-label>
+  
+          <ion-label class="statusbtns success" *ngIf="e.Status === offerStatus.proceed">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.StatusStr}}</span>
+          </ion-label>
+          <ion-label class="statusbtns success" *ngIf="e.Status === offerStatus.scheduleUpdated">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.StatusStr}}</span>
+          </ion-label>
+  
+  
+        </div>
+        <div class="arrow_list_sec">
+          <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    </ng-container>
+    <div class="no_jobs" *ngIf="timeOffRequestList.length==0 && isData==false">
+      <span>No data Found</span>
+    </div>
+    <ion-infinite-scroll threshold="100px" *ngIf="loadmore==true" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

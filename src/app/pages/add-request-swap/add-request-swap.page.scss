@@ -1,0 +1,159 @@
+.main_sec{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5% !important;
+}
+
+ion-select{
+    --padding-start:16px !important;
+    font-family: 'Poppins' !important;
+}
+
+.search_head{
+    max-height: 55px !important;
+}
+.back_icon{
+    color: #fff !important;
+}
+.terms-title{
+    font-family: Poppins !important;
+    font-weight: 600;
+    color: #265CB2 !important;
+    font-size: 15px !important;
+}
+
+.save_button{
+    --background: #265CB2;
+    --border-radius: 50px;
+    width:80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    margin-left: 54%;
+}
+
+.cancel_button{
+    --background: #f8fafc;
+    --border-radius: 50px;
+    color:  #265CB2;
+    width:80px;
+    height: 27px;
+    font-weight: 500;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+}
+
+.outline-button {
+	--border-color: #265CB2;
+}
+
+.btn_sec{
+    margin-top: 1%;
+}
+
+ion-item.popup_inputs{
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 8px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+.popoup_label{
+    font-family: 'Poppins' !important;
+    font-weight: 550;
+    width: 98%;
+    --min-height: 0px !important;
+}
+
+.search_head.header-md::after, .menuheader.header-ios::after{ background-image:none; }
+
+.save_btn{
+    margin-right: 10px
+}
+.cncl_btn{
+    margin-left: 10px;
+}
+.agree_terms{
+    font-size: 15px !important;
+    overflow: auto;
+    white-space: normal;
+}
+
+ion-item.popoup_input_space{
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 2px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+.custom_label{
+    white-space: normal !important;
+    text-overflow: none;
+}
+
+.custom_inp{
+    outline: none;
+    border: none;
+    color: black !important;
+    width: 100% !important;
+    background: #fff;
+}
+
+.custom_inp::placeholder { 
+    color:black;
+  }
+
+.validation_error{
+    margin-bottom: 1% !important;
+}
+
+.custom_ckeditor{
+    height: 158px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+   max-width: 100% !important;
+}
+
+@media only screen 
+and (min-device-width: 360px) 
+and (max-device-width: 375px) 
+{
+    
+    .terms-title{
+        font-size: 14px !important;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 359px) { 
+    :host ::ng-deep .terms-title{
+        padding-inline: 70px !important;
+     }
+
+ }
+ @media (min-width: 768px) and (max-width: 1024px) { 
+    .save_button, .cancel_button{
+        width: 90px !important;
+        height: 35px !important;
+       font-size: 16px !important;
+    }
+ }
+ @media (min-width: 600px) and (max-width: 767px) { 
+    .save_button, .cancel_button{
+        width: 90px !important;
+        height: 35px !important;
+       font-size: 16px !important;
+    }
+ }
+

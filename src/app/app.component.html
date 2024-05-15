@@ -1,0 +1,48 @@
+<ion-app>
+  
+  <ion-menu contentId="main-content" [swipeGesture]="false"  menu-Id="main-menu" menuId="main-menu" (ionWillOpen)="openMenu()">
+    <ion-content>
+      <ion-header class="menuheader">
+        <div [style]="{'--background':'black'}">
+          <img id="imglogo" src="../assets/images/logo.png"/>
+        </div>
+      </ion-header>
+      
+      <ion-list id="inbox-list" lines="none" class="list_main_menu">
+        
+        <div *ngFor="let p of pages; let i = index">
+          <ion-menu-toggle autoHide="false" >
+            <ion-item routerDirection="root" [routerLink]="p.url" lines="none" class="item_main_headr"
+            [routerLinkActive]="['selected']"
+            [routerLinkActiveOptions]="{exact: true}"
+            detail="false" [disabled]="p.isEnabled" (click)="selected(p,i)"
+            [color]="p.isEnabled ? '' : '#FFF'"
+            style="border-radius: 3px;"
+            [ngClass]="{'hash':p.isEnabled==true}">
+            <ion-icon class="icon_main" [ngClass]="{'hashicon':p.isEnabled==true}" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label class="lable_text"  [ngClass]="{'hashl':p.isEnabled==true}">{{ p.title}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </div>
+      <div >
+        <ion-menu-toggle autoHide="false" (click)="logout()">
+          <ion-item  lines="none" class="item_main_headr"
+          detail="false"  
+          style="border-radius: 3px;">
+          <ion-icon class="icon_main" name="log-out"></ion-icon>
+          <ion-label class="lable_text"  >Logout</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </div>
+    <div>
+       <ion-item>
+        <p class="lable_text">App Version: <b>v{{ ionVersionNumber }}</b></p>
+       </ion-item>
+   </div>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main-content" [swipeGesture]="false"></ion-router-outlet>
+
+</ion-app>
+

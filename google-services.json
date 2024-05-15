@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "3285108070",
+    "project_id": "covermywork",
+    "storage_bucket": "covermywork.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3285108070:android:e3b72b326d7bb0c45fb4a7",
+        "android_client_info": {
+          "package_name": "com.covermywork.stage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3285108070-85u9b62das16pjqrk2ob9c4a0mahpedc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDupUQ6aekJnymG84jHB6U1pV1tpc8ihDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3285108070-85u9b62das16pjqrk2ob9c4a0mahpedc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

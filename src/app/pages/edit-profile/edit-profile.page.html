@@ -1,0 +1,132 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start">
+      <ion-menu-button class="header-icon" menu="main-menu" autoHide='false'></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title_header">Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="userForm" [formGroup]="userForm" class="list-form">
+    <ion-item lines="none">
+      <ion-label class="form_header">Edit Profile
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Location:<b>&nbsp;&nbsp; {{user.location?.locationName}}</b></ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Company:<b>&nbsp;&nbsp; {{user.company?.companyName}}</b></ion-label>
+    </ion-item>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Department</ion-label>
+    </ion-item>
+    <ion-item class="select_input_space profile_inputs"
+      [ngClass]="{'input_space': isSubmitted && this.userForm.controls.departmentId.errors }" lines="none">
+      <ion-select class="select_company"  formControlName="departmentId"
+        (ionChange)="onDepartmentChange($event)">
+        <ion-select-option *ngFor="let department of departmentList" [value]="department.departmentId">
+          {{department.departmentName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['departmentId']" [messages]="messageList.departmentId">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Shift</ion-label>
+    </ion-item>
+    <ion-item class="select_input_space profile_inputs"
+      [ngClass]="{'input_space': isSubmitted && this.userForm.controls.shiftId.errors }" lines="none">
+      <!-- <ion-select class="select_company"  placeholder="Select Shift" formControlName="shiftId">
+        <ion-select-option *ngFor="let shift of shiftList" [value]="shift.shiftId">{{shift.title}}</ion-select-option>
+      </ion-select> -->
+
+      <ion-select class="select_company"  placeholder="Select Shift" formControlName="shiftId">
+        <ion-select-option *ngFor="let shift of shiftList" [value]="shift.shiftId">
+          {{shift.title}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['shiftId']" [messages]="messageList.shiftId">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Name</ion-label>
+    </ion-item>
+    <ion-item class="select_input_space profile_inputs"
+      [ngClass]="{'input_space': isSubmitted && this.userForm.controls.name.errors }" lines="none">
+      <ion-input type="text" class="login_input" formControlName="name" placeholder="Name" trim="blur"></ion-input>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['name']" [messages]="messageList.name">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Phone Number </ion-label>
+    </ion-item>
+    <ion-item class="section_inputs profile_inputs"
+      [ngClass]="{'input_space': isSubmitted && this.userForm.controls.phone.errors }" lines="none">
+      <ion-input input type="text" class="login_input input_custom" placeholder="Phone Number" formControlName="phone">
+      </ion-input>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['phone']" [messages]="messageList.phone">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Email </ion-label>
+    </ion-item>
+    <ion-item class="section_inputs profile_inputs readonly_input" lines="none">
+      <ion-input type="text" class="login_input" placeholder="Email" name="emailId" formControlName="emailId"
+        trim="blur" Readonly></ion-input>
+    </ion-item>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Company Username</ion-label>
+    </ion-item>
+    <ion-item class="section_inputs profile_inputs readonly_input" lines="none">
+      <ion-input type="text" class="login_input" placeholder="Company username" formControlName="companyUsername"
+        Readonly></ion-input>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['companyUsername']" [messages]="messageList.companyUsername">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Employee Id</ion-label>
+    </ion-item>
+    <ion-item class="section_inputs profile_inputs readonly_input" lines="none">
+      <ion-input type="text" class="login_input" placeholder="EmployeeId" formControlName="employeeId" Readonly>
+      </ion-input>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['employeeId']" [messages]="messageList.employeeId">
+    </app-validation-message>
+
+    <ion-item class="label_item" lines="none">
+      <ion-label>Communication Method</ion-label>
+    </ion-item>
+    <ion-item class="section_inputs profile_inputs"
+      [ngClass]="{'input_space': isSubmitted && this.userForm.controls.GetCommunicationMethod.errors }" lines="none">
+      <ion-select multiple="true" class="select_company"  placeholder="Communication Method"
+        formControlName="GetCommunicationMethod" (ionChange)="changeValue($event)"
+        [value]="userForm.value.GetCommunicationMethod">
+        <ion-select-option [value]="option.id" *ngFor="let option of dropdownList">{{option.text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-validation-message [control]="userForm.controls['GetCommunicationMethod']"
+      [messages]="messageList.GetCommunicationMethod">
+    </app-validation-message>
+
+    <div class="terms_condition_item" lines="none">
+      <div class="terms">
+        <ion-checkbox class="checkbox_terms" formControlName="isRecievingTextMessage" slot="start" mode="md">
+        </ion-checkbox>
+        <ion-label id="term">Agree to receive text messages carrier charges may apply.</ion-label>
+      </div>
+    </div>
+
+    <div class="button_section">
+      <ion-button class="login_button" (click)="onSubmit()">Save</ion-button>
+    </div>
+  </form>
+</ion-content>

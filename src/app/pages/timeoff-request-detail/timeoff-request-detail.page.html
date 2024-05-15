@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-title class="title_header">Time Off Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="timeOffData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl"> Created Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{timeOffData.CreatedDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Time Off Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timeOffData.TimeOffConfiguration.Name}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Start Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cloud-done" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timeOffData.TimeOffStartDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      
+    
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">End Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cloud-offline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timeOffData.TimeOffEndDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Total Requested Hour</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">- {{timeOffData.totolRequestedHoursStr | slice:0:5 }} Hours</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Net Balance</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="card" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{timeOffData.NetBalance}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>      
+
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="timeOffData.Status === offerStatus.hrApproval">
+                {{timeOffData.StatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl primary" *ngIf="timeOffData.Status === offerStatus.pendingProceed">
+                {{timeOffData.StatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="timeOffData.Status === offerStatus.proceed">
+                {{timeOffData.StatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="timeOffData.Status === offerStatus.scheduleUpdated">
+                {{timeOffData.StatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl danger" *ngIf="timeOffData.Status === offerStatus.rejected">
+                {{timeOffData.StatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="btn_sec" *ngIf="timeOffData.Status === offerStatus.hrApproval">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+
+
+              <ng-container *ngIf="timeOffData.Status === offerStatus.hrApproval">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(timeOffData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(timeOffData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

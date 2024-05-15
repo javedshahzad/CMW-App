@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-title class="title_header">Early Out Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="EarlyOutData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Departure Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{ EarlyOutData.depatureTime | date :'MM/dd/yyyy hh:mm a' }}</span>
+            </ion-label>
+          </div>
+        </div>  
+      </ion-item>
+
+      <!-- <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Effective Request Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{EarlyOutData.dateToSkipDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item> -->
+     <!--  <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="time" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{EarlyOutData.VtoStartTime12Hours}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">UTO</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{EarlyOutData.uTOHours}} Hours</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item> -->
+      
+    
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Apply PTO</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{EarlyOutData.IsPaidOff}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Reason</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{EarlyOutData.ReasonObj.name}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Reason Details</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{!!EarlyOutData.OtherReason ? EarlyOutData.OtherReason: "N/A"}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      
+
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="EarlyOutData.status === offerStatus.hrApproval">
+                {{EarlyOutData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl primary" *ngIf="EarlyOutData.status === offerStatus.pendingProceed">
+                {{EarlyOutData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="EarlyOutData.status === offerStatus.proceed">
+                {{EarlyOutData.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="btn_sec" *ngIf="EarlyOutData.status === offerStatus.hrApproval">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+              
+
+              <ng-container *ngIf="EarlyOutData.status === offerStatus.hrApproval">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(EarlyOutData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(EarlyOutData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

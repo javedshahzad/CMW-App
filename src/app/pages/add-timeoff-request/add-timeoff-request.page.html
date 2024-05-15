@@ -1,0 +1,235 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header" *ngIf="!timeOffRequestModel">
+      Add Time Off Request
+    </ion-title>
+    <ion-title class="title_header" *ngIf="timeOffRequestModel">
+      Edit Time Off Request
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main_sec" no-bounce>
+    <form
+      [formGroup]="timeOffRequestForm"
+      class="list-form"
+      *ngIf="timeOffRequestForm"
+    >
+      <ion-item lines="none" class="popoup_label">
+        <ion-label>Time Off Type</ion-label>
+      </ion-item>
+      <ion-item class="popup_inputs" lines="none">
+        <ion-select
+          class="select_company"
+          
+          placeholder="Select Time-off Type"
+          #selectedReason
+          formControlName="TimeOffId"
+        >
+          <ion-select-option
+          *ngFor="let type of timeOffConfigList"
+              [value]="type.TimeOffId"
+          >
+            {{ type.Name }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <app-validation-message
+        [control]="timeOffRequestForm.controls['TimeOffId']"
+        [messages]="messageList.TimeOffId"
+      >
+      </app-validation-message>
+
+      <div class="start_time_div">
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Start Date</ion-label>
+        </ion-item>
+        <!-- <div class="popup_inputs" lines="none">
+          <ion-item class="popup_inputs" lines="none">
+            <input
+              type="text"
+              class="login_input custom_inp"
+              name="startDate"
+              placeholder="MM/DD/YYYY"
+              bsDatepicker
+              formControlName="TimeOffStartDate"
+              (bsValueChange)="startDateChangeValidation($event)"
+              (onShown)="hideKey()"
+              [bsConfig]="bsConfig"
+            />
+          </ion-item>
+          <timepicker
+            class="Timepicker"
+            [ngClass]="{
+                redBorder:
+                  timeOffRequestForm.get('TimeOffStartTime').touched &&
+                  timeOffRequestForm
+                    .get('TimeOffStartTime')
+                    .hasError('required')
+              }"
+            formControlName="TimeOffStartTime"
+            [mousewheel]="false"
+            [showSpinners]="false"
+            [showMeridian]="false"
+          ></timepicker>
+        </div> -->
+        <ion-datetime
+        [formControl]="timeOffRequestForm.controls['TimeOffStartDate']"
+        name="startDate"
+        placeholder="MM/DD/YYYY hh:mm "
+        displayFormat="MM/DD/YYYY, hh:mm A"
+        [min]='minDate'
+        (onShown)="hideKey()"
+        (ionChange)="startDateChangeValidation($event);"
+        (ionBlur)="ionBlurEvent($event)"
+        (ionCancel)="ionCancelEvent($event)"
+        [ngClass]="{
+                redBorder:
+                timeOffRequestForm.get('TimeOffStartDate').touched &&
+                timeOffRequestForm
+                    .get('TimeOffStartDate')
+                    .hasError('required')
+              }"
+      ></ion-datetime>
+        <app-validation-message
+          [control]="timeOffRequestForm.controls['TimeOffStartDate']"
+          [messages]="messageList.TimeOffStartDate"
+        >
+        </app-validation-message> 
+        <div class="ml-2">
+          <div
+            *ngIf="
+            !timeOffRequestForm.get('TimeOffStartDate').hasError('required')
+          "
+          >
+            <app-validation-message
+              [control]="timeOffRequestForm.controls['TimeOffStartTime']"
+              [messages]="messageList.TimeOffStartTime"
+            >
+            </app-validation-message>
+          </div>
+        </div>
+      </div>
+
+      <ion-item lines="none" class="popoup_label">
+        <ion-label>Duration</ion-label>
+      </ion-item>
+      <ion-item class="popup_inputs" lines="none">
+        <ion-select
+          class="select_company"
+          
+          formControlName="Duration"
+          #selectedReason
+          (ionChange)="onDurationChange($event)"
+        >
+          <ion-select-option
+          *ngFor="let type of durationType"
+          [value]="type.id"
+        >
+          {{ type.value }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <app-validation-message
+        [control]="timeOffRequestForm.controls['Duration']"
+        [messages]="messageList.Duration"
+      >
+      </app-validation-message>
+      <div class="start_time_div">
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>End Date</ion-label>
+        </ion-item>
+        <!-- <div class="popup_inputs" lines="none">
+          <ion-item class="popup_inputs" lines="none">
+            <input
+              type="text"
+              class="login_input custom_inp"
+              name="endDate"
+              placeholder="MM/DD/YYYY"
+              bsDatepicker
+              formControlName="TimeOffEndDate"
+              (onShown)="hideKey()"
+              name="from"
+              [bsConfig]="bsConfig"
+            />
+          </ion-item>
+          <timepicker
+            class="Timepicker"
+            [ngClass]="{
+                redBorder:
+                  timeOffRequestForm.get('TimeOffEndTime').touched &&
+                  timeOffRequestForm
+                    .get('TimeOffEndTime')
+                    .hasError('required')
+              }"
+            formControlName="TimeOffEndTime"
+            [mousewheel]="false"
+            [showSpinners]="false"
+            [showMeridian]="false"
+          ></timepicker>
+        </div> -->
+        <ion-datetime
+        [formControl]="timeOffRequestForm.controls['TimeOffEndTime']"
+        name="endDate"
+        placeholder="MM/DD/YYYY hh:mm "
+        displayFormat="MM/DD/YYYY, hh:mm A"
+        (onShown)="hideKey()"
+        [ngClass]="{
+                redBorder:
+                timeOffRequestForm.get('TimeOffEndTime').touched &&
+                timeOffRequestForm
+                    .get('TimeOffEndTime')
+                    .hasError('required')
+              }"
+      ></ion-datetime>
+        <app-validation-message
+          class="validation_error"
+          [control]="timeOffRequestForm.controls['TimeOffEndDate']"
+          [messages]="messageList.TimeOffEndDate"
+        >
+        </app-validation-message>
+        <div class="ml-2">
+          <div
+            *ngIf="
+            !timeOffRequestForm.get('TimeOffEndDate').hasError('required')
+          "
+          >
+            <app-validation-message
+              [control]="timeOffRequestForm.controls['TimeOffEndTime']"
+              [messages]="messageList.TimeOffEndTime"
+            >
+            </app-validation-message>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <ion-row class="btn_sec" *ngIf="timeOffRequestForm">
+      <ion-col col-md-4>
+        <div class="button_section save_btn">
+          <ion-button
+            class="save_button"
+            (click)="onSubmit()"
+            >Save</ion-button
+          >
+        </div>
+      </ion-col>
+      <ion-col col-md-4>
+        <div class="button_section cncl_btn">
+          <ion-button
+            class="cancel_button outline-button"
+            fill="outline"
+            (click)="closeModal()"
+            >Cancel</ion-button
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

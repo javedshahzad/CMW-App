@@ -1,0 +1,137 @@
+ion-menu ion-item{
+  background: #fff;
+  --background:#fff;
+  color: #000;
+}
+
+.menu-header{
+    text-align:left;
+    color:#000;
+    // --background:black;
+    font-weight: 600;
+    background-image:none !important;
+}
+ion-title.menu-header{
+    // font-family: 'Synco' !important;
+   
+    font-size: 16px !important;
+    padding-inline: 25px;
+    // margin-top: 9%;
+    position: relative;
+
+}
+::ng-deep{
+    .ck.ck-toolbar.ck-toolbar_grouping{
+        border:none !important;
+    }
+}
+
+
+.list_main_menu{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.menu-item-title{
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: medium;
+    padding: 8px 0px;
+    border-bottom: 1px solid #dedede;
+}
+
+.icon-selected{
+    font-size: 24px;
+    color: black;
+    margin: 0px 32px 0px 0px;
+}
+
+.text-selected{
+    font-weight: 600;
+}
+
+.sec_show_more{
+    width: 100%;
+    border-bottom: 1px solid #dedede;
+}
+.show_all {
+    text-align: center;
+    width: 100%;
+}
+.icon_down_arrow{
+    vertical-align: middle;
+}
+
+ion-menu ion-header{
+    
+}
+#imglogo{
+    width:70%;
+    
+}
+
+.menuheader.header-md::after, .menuheader.header-ios::after{ background-image:none; }
+
+.icon_main{ margin-inline-end: 20px; color: #5285d4;     margin-top: 10px !important;
+    margin-bottom: 10px !important;}
+    
+.menuheader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f6ff;
+    
+}
+
+.lable_text{
+    font-size: 16px;
+    font-family: 'Poppins';
+}
+
+
+
+
+  ion-item.hash{
+      opacity: 1 !important;
+      border-left: 4px solid #5285d4;
+      border-radius: 0 !important;
+      --background: #c6dcff !important;
+  }
+  ion-label.hashl{
+    --color: #000000 !important;
+}
+ion-icon.hashicon{
+    --color: #5285d4!important;
+    color: #5285d4!important;
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+}
+.item_main_headr{
+    border-bottom: 1px solid #f0f6ff !important;
+}
+  .sc-ion-alert-ios-h,.lang{
+    font-family: 'Poppins' !important;
+  }
+  @media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) {
+  ion-title.menu-header{
+    font-size: 22px !important;
+    padding-inline: 29px;
+    // margin-top: 11%;
+  }
+  ion-header{
+      border-bottom: 1px solid gray;
+      margin-bottom: 5%;
+  }
+  ion-menu ion-header{
+    min-height: 15% !important;
+  }
+  
+}
+@media only screen and (min-height:720px){
+    .menuheader{
+     padding: 40px 20px 20px 20px !important;
+    }
+  }

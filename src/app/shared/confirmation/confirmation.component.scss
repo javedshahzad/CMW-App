@@ -1,0 +1,47 @@
+// @import "../../styles/colors.scss";
+.add_rol_modal {
+  .modal-header {
+    padding: 1.325rem 1.875rem 1.325rem 1.5rem;
+    .modal-title {
+      font-weight: normal;
+      line-height: normal;
+      font-size: 1.125rem;
+      color: darkblue;
+    }
+  }
+  .modal-footer {
+    border-top: 1px solid aliceBlue !important;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+.close_popup {
+  cursor: pointer;
+  float: right;
+  color: blue !important;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+::ng-deep {
+  .modal-body {
+    padding: 1.5rem;
+    &.add_user_popup {
+      label {
+        font-weight: normal;
+        line-height: 20px;
+        font-size: 0.875rem;
+        color: gray;
+      }
+    }
+  }
+  .modal-footer {
+    padding: 1.5rem;
+    border-top: none;
+  }
+}
+.btn-primary {
+  min-width: 100px !important;
+  width: 130px !important;
+}

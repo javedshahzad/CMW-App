@@ -1,0 +1,102 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header" *ngIf="offerForm">
+      {{value('offerId') > 0 ? 'Edit Request Swap' : 'Add
+      Request Swap'}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content">
+  <div class="main_sec" no-bounce>
+    <form [formGroup]="offerForm" class="list-form" *ngIf="offerForm">
+      <ion-item lines="none" class="popoup_label">
+        <ion-label>I would like to skip</ion-label>
+      </ion-item>
+      <ion-item class="popup_inputs"
+        [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.dateToSkip.errors }" lines="none">
+        <ng-conatiner *ngIf="role === roleEnum.manager">
+          <input type="text" readonly class="login_input custom_inp" name="startDate" placeholder="MM-DD-YYYY"
+            bsDatepicker formControlName="dateToSkip" [minDate]="nextMinDate" name="from"
+            (bsValueChange)="skipDateChange($event)" (onShown)="hideKey()" [bsConfig]="bsConfig" />
+        </ng-conatiner>
+        <ng-container *ngIf="role === roleEnum.user">
+          <!-- <input type="text" readonly class="login_input custom_inp" name="startDate" placeholder="MM-DD-YYYY"
+            bsDatepicker formControlName="dateToSkip" [minDate]="nextMinDate" 
+            (bsValueChange)="skipDateChange($event)" (onShown)="hideKey()"  name="from" [bsConfig]="bsConfig" /> -->
+          <ion-datetime [formControl]="offerForm.controls['dateToSkip']" class="login_input custom_inp" name="endDate"
+            name="from" placeholder="MM/DD/YYYY " displayFormat="MM/DD/YYYY" [min]='nextMinDate' [max]='maxYear'
+            [(ngModel)]="dateToSkipValue" (ionChange)="skipDateChange($event)" (onShown)="hideKey()"></ion-datetime>
+        </ng-container>
+      </ion-item>
+      <app-validation-message class="validation_error" [control]="offerForm.controls['dateToSkip']"
+        [messages]="messageList.dateToSkip">
+      </app-validation-message>
+
+      <ion-item lines="none" class="popoup_label">
+        <ion-label>I would like to work on</ion-label>
+      </ion-item>
+      <ion-item class="popup_inputs"
+        [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.dateToSkip.errors }" lines="none">
+        <ng-container *ngIf="role ===roleEnum.manager">
+          <input type="text" readonly class="login_input custom_inp" name="endDate" placeholder="MM-DD-YYYY"
+            bsDatepicker formControlName="dateToWork" name="from" [minDate]="minDate" [maxDate]="maxDate"
+            [bsConfig]="bsConfig" [daysDisabled]="disableDaysForDateToWork" (bsValueChange)="workDateChange($event)" />
+        </ng-container>
+        <ng-container *ngIf="role ===roleEnum.user">
+          <!-- <input type="text" readonly class="login_input custom_inp" name="endDate" placeholder="MM-DD-YYYY"
+            bsDatepicker formControlName="dateToWork" name="from" [minDate]="minDate" [maxDate]="maxDate"
+            (bsValueChange)="workDateChange($event)" [daysDisabled]="disableDaysForDateToWork" [bsConfig]="bsConfig" /> -->
+          <ion-datetime [formControl]="offerForm.controls['dateToWork']" class="login_input custom_inp" name="endDate"
+            name="from" placeholder="MM/DD/YYYY " displayFormat="MM/DD/YYYY" [min]='nextMinDate' [max]='maxYear'
+            [(ngModel)]="dateToWorkValue" (ionChange)="workDateChange($event)" (onShown)="hideKey()"></ion-datetime>
+        </ng-container>
+
+      </ion-item>
+      <app-validation-message class="validation_error" [control]="offerForm.controls['dateToWork']"
+        [messages]="messageList.dateToWork">
+      </app-validation-message>
+
+      <ng-container *ngIf="role !== roleEnum.manager && isShowShift">
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Shift to work on</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-select class="select_company"  placeholder="Select Shift"
+            formControlName="shiftToWork">
+            <ion-select-option *ngFor="let shift of shiftList" [value]="shift.shiftId">
+              {{shift.title}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['shiftToWork']" [messages]="messageList.shiftToWork">
+        </app-validation-message>
+      </ng-container>
+
+
+      <ion-item lines="none" class="popoup_label">
+        <ion-label class="agree_terms">I agree to the following terms to the offer</ion-label>
+      </ion-item>
+      <ion-item lines="none" class="popup_inputs custom_ckeditor">
+        <ckeditor class="ck-editor__editable_inline" [editor]="Editor" formControlName="termsMsg" [disabled]="true">
+        </ckeditor>
+      </ion-item>
+    </form>
+    <ion-row class="btn_sec" *ngIf="offerForm">
+      <ion-col col-md-4>
+        <div class="button_section save_btn">
+          <ion-button class="save_button" (click)="onSubmit()">Save</ion-button>
+        </div>
+      </ion-col>
+      <ion-col col-md-4>
+        <div class="button_section cncl_btn">
+          <ion-button class="cancel_button outline-button" fill="outline" (click)="closeModal()">Cancel</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

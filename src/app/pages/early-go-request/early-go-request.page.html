@@ -1,0 +1,88 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" (click)="openearlyRequests('add')">
+      <ion-button>
+        <ion-icon class="icon_plus" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="title_header">Early Out Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar debounce="500" class="search_phrases" name="filterTextValue"  [(ngModel)]="searchfield"  (ionChange)="searchRequest($event)">
+    </ion-searchbar>
+  </ion-item>
+  <ng-container *ngIf="earlyOutRequestList.length > 0">
+    <ion-card class="swap_card_sec" *ngFor="let e of earlyOutRequestList" [ngClass]="e.statusClass">
+      <div class="main_sec" (click)="goToEarlyDetail(e)">
+        <div class="status_line" [ngClass]="e.statusClass">
+  
+        </div>
+        <div class="time_sec">
+          <!-- <ion-label class="label_date_text">{{e.timeTypeStr}}</ion-label>
+          <ion-label class="text_time btmsppace" *ngIf="e.vtoStartTime!=null">
+            {{e.startTimeToShow}}
+          </ion-label>
+          <ion-label class="text_time" *ngIf="e.vtoEndTime!=null">
+            {{e.endTimeToShow}}
+          </ion-label> -->
+          <h4><b>Early-Out</b></h4>
+        </div>
+  
+        <div class="date_sec">
+          <ion-label class="label_date_text">
+            <span>{{ e.depatureTime | date :'MM/dd/yyyy hh:mm a' }}</span>
+  
+  
+          </ion-label>
+  
+          <!-- remove task : https://sharing.clickup.com/10625334/t/h/2up2nuk/ZKAK634BL7LD9P5 -->
+          <!-- <ion-label class="date_cldout">
+            <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.uTOHours}} Hours</span>
+          </ion-label> -->
+          <ion-label class="date_cldout">
+            <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.ReasonObj.name}}</span>
+          </ion-label>
+  
+          <ion-label class="statusbtns danger" *ngIf="e.status === offerStatus.pendingProceed">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+  
+          <ion-label class="statusbtns danger" *ngIf="e.status === offerStatus.hrApproval">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+  
+          <ion-label class="statusbtns success" *ngIf="e.status === offerStatus.proceed">
+            <ion-icon name="flower" class="cld-icons"></ion-icon>
+            <span class="day_text">{{e.offerStatusStr}}</span>
+          </ion-label>
+  
+  
+        </div>
+        <div class="arrow_list_sec">
+          <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    </ng-container>
+    <div class="no_jobs" *ngIf="earlyOutRequestList.length==0">
+      <span>No data Found</span>
+    </div>
+    <ion-infinite-scroll threshold="100px" *ngIf="loadmore==true" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

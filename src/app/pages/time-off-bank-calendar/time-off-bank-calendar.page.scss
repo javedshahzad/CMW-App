@@ -1,0 +1,21 @@
+
+::ng-deep {
+    .greenCss{
+        background-color: green !important;
+        
+        >p {
+            color: #fff !important; 
+        }
+    }
+
+    .redCss{
+        background-color: red !important;
+        >p {
+            color: #fff !important; 
+        }
+    }
+}
+.back_icon {
+    color: #fff !important;
+  }
+

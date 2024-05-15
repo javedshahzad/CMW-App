@@ -1,0 +1,134 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header">VOT Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="votData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">I would like to work on </ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{votData.dateToWorkDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="votData.isHourEarly!=false && HourEarly.Enable==true">
+        <div class="popup_div">
+          <ion-label class="textlbl">Hour Early</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{votData.isHourEarlyShow}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      
+      <ion-item class="popoup_label" *ngIf="votData.isHourLate!=null && HourLate.Enable==true">
+        <div class="popup_div">
+          <ion-label class="textlbl">Hour Late</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{votData.isHourLateShow}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Requested Department</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{votData.departmentName}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Requested Shift</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{votData.shiftToWorkTitle}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Requested Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cloud" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{votData.timeTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="votData.status === offerStatus.rejected">
+                {{votData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl danger" *ngIf="votData.status === offerStatus.hrApproval">
+                {{votData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="votData.status === offerStatus.scheduleUpdated">
+                {{votData.offerStatusStr}}
+              </ion-label>
+              <ion-label class="pending_lbl primary" *ngIf="votData.status === offerStatus.proceed">
+                {{votData.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="btn_sec" *ngIf="votData.status === offerStatus.hrApproval">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+
+
+              <ng-container *ngIf="votData.status === offerStatus.hrApproval">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(votData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(votData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

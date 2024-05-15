@@ -1,0 +1,180 @@
+.main_sec {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 5% !important;
+}
+
+ion-select {
+  --padding-start: 16px !important;
+  font-family: "Poppins" !important;
+}
+
+.search_head {
+  max-height: 55px !important;
+}
+.back_icon {
+  color: #fff !important;
+}
+.terms-title {
+  font-family: Poppins !important;
+  font-weight: 600;
+  color: #265cb2 !important;
+  font-size: 15px !important;
+}
+
+.save_button {
+  --background: #265cb2;
+  --border-radius: 50px;
+  width: 80px;
+  height: 27px;
+  font-weight: 100;
+  font-family: "Poppins";
+  font-size: 12px;
+  text-transform: none;
+  margin-left: 54%;
+}
+
+.cancel_button {
+  --background: #f8fafc;
+  --border-radius: 50px;
+  color: #265cb2;
+  width: 80px;
+  height: 27px;
+  font-weight: 500;
+  font-family: "Poppins";
+  font-size: 12px;
+  text-transform: none;
+}
+
+.outline-button {
+  --border-color: #265cb2;
+}
+
+.btn_sec {
+  margin-top: 10%;
+}
+
+ion-item.popup_inputs {
+  --highlight-height: 0;
+  margin: 0 auto;
+  margin-bottom: 8px !important;
+  --padding-start: 10px !important;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+  border-radius: 6px;
+  width: 98%;
+}
+
+.popoup_label {
+  font-family: "Poppins" !important;
+  font-weight: 550;
+  width: 98%;
+  --min-height: 0px !important;
+}
+.time_label {
+    --padding-start: 8px !important;
+  }
+
+.search_head.header-md::after,
+.menuheader.header-ios::after {
+  background-image: none;
+}
+
+.save_btn {
+  margin-right: 10px;
+}
+.cncl_btn {
+  margin-left: 10px;
+}
+
+ion-item.popoup_input_space {
+  --highlight-height: 0;
+  margin: 0 auto;
+  margin-bottom: 2px !important;
+  --padding-start: 10px !important;
+  border: 1px solid #e4e4e4;
+  box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+  border-radius: 6px;
+  width: 98%;
+}
+
+.time_box {
+  --highlight-height: 0;
+  margin: 0 auto;
+  margin-top: 15px !important;
+}
+.custom_inp {
+  outline: none;
+  border: none;
+  color: black !important;
+  width: 100% !important;
+  background: white !important;
+}
+
+.start-end-time {
+  --padding-start: 2px !important;
+}
+
+.start-end-time_space {
+  --padding-start: 2px !important;
+}
+
+.time_sec {
+  margin-top: 2%;
+}
+
+.time_sec_space {
+  margin-top: 11%;
+}
+
+::ng-deep {
+  .timepicker {
+    table tr td {
+      .btn {
+        display: none;
+        min-width: 0px !important;
+        background: #e9ecef;
+        color: #000;
+      }
+      .btn:hover {
+        color: #000;
+      }
+    }
+    tr.text-center {
+      display: none;
+    }
+  }
+}
+
+.custom_inp::placeholder {
+  color: black;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 375px) {
+  .terms-title {
+    font-size: 14px !important;
+  }
+}
+::ng-deep {
+  .timepicker1 {
+    display: block !important;
+    table tr td {
+      .btn {
+        
+        min-width: 0px !important;
+        color: #000;
+        height: 35px;
+        background-color: lightgrey;
+      }
+      .btn:hover {
+        color: #000;
+      }
+    }
+    tr.text-center {
+      .btn{
+        padding: 0 !important;
+        color: lightgrey;
+      }
+    }
+  }
+}

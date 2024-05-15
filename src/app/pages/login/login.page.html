@@ -1,0 +1,83 @@
+<ion-content>
+  <div class="login_sec">
+    <img src="../../../assets/images/logo.png" style="width: 65%;">
+  </div>
+  <div class="login_information">
+    <!-- <ion-label class="text_label_login">
+      Fill the Below Information to Login
+    </ion-label> -->
+  </div>
+
+  <form class="list-form" *ngIf="signInForm" [formGroup]="signInForm">
+    <ion-card class="login_card">
+      <ion-item lines="none" class="login_account_sect">
+        <ion-label class="login_account_text" id="logn_text">Login Account</ion-label>
+      </ion-item>
+
+      <ion-item class="section_inputs"
+        [ngClass]="{'input_space': isSubmitted && this.signInForm.controls.companyUserName.errors }" lines="none">
+        <ion-input (input)="userNameChange($event)" class="login_input" placeholder="User Name" formControlName="companyUserName"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signInForm.controls['companyUserName']"
+        [messages]="messageList.companyUserName">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signInForm.controls.password.errors }" lines="none">
+        <app-show-hide-password>
+          <ion-input type="password" class="login_input" placeholder="Password" formControlName="password"></ion-input>
+        </app-show-hide-password>
+        <ion-button *ngIf="!isFaceId" class="biometric_button" [disabled]="!this.signInForm.controls.companyUserName.valid"
+          (click)="showFingeerprintAuthentication()" slot="end">
+          <ion-icon *ngIf="!isFaceId" class="biometric_icon" name="finger-print-outline"></ion-icon>
+        	<!-- <ion-icon class="faceId"  *ngIf="!isFaceId" src="../../../assets/icon/faceIdIcon.svg"></ion-icon> -->
+        </ion-button>
+        <img *ngIf="isFaceId" class="faceIcon"  (click)="showFingeerprintAuthentication()" src="../../../assets/icon/faceIcon.png">
+      </ion-item>
+      <app-validation-message [control]="signInForm.controls['password']" [messages]="messageList.password">
+      </app-validation-message>
+
+      <ion-item class="section_inputs" *ngIf="isMultiple"
+        [ngClass]="{'input_space': isSubmitted && this.signInForm.controls.companyId.errors }" lines="none">
+        <ion-select class="select_company" placeholder="Select Company" formControlName="companyId"
+          (ionChange)="getCompany($event)">
+          <ion-select-option disabled value=''>Select Company</ion-select-option>
+          <ion-select-option *ngFor="let company of companyList" [value]="company.companyId">{{company.companyName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signInForm.controls['companyId']" [messages]="messageList.companyId">
+      </app-validation-message>
+      <ion-item *ngIf="isChangeCompany" class="companyName" lines="none">
+        <ion-label class="reg_lable">Company Name: <b>{{userCompanyName}}</b></ion-label>
+      </ion-item>
+      <ion-item *ngIf="isChangeCompany" class="companyName" lines="none">
+        <ion-label class="reg_lable" (click)="changeUserCompany(signInForm.controls.companyUserName.value)">Change Company?</ion-label>
+      </ion-item>
+
+      <ion-item class="forgot_text" lines="none">
+        <ion-label class="reg_lable" (click)="redirectToForgot();">Forgot Password?</ion-label>
+      </ion-item>
+
+
+      <div class="button_section">
+        <ion-button class="login_button" (click)="signIn()">Sign In</ion-button>
+      </div>
+      <!-- <div class="button_section">
+        <ion-button class="login_button" (click)="showFingeerprintAuthentication()">Face ID</ion-button>
+      </div> -->
+    </ion-card>
+  </form>
+
+  <div class="sign_up_section fpLink"> Don't have account?<strong>
+      <span class="sign_up_here" (click)="redirectToSignIn();">Sign Up Here</span>
+    </strong><br>
+  </div>
+
+  <div class="terms_conditions" lines="none">
+    <span class="text_1_terms" tabindex="-1" (click)="openTerms(1)">Terms and Conditions</span>
+    <span class="text_2_terms">OR</span>
+    <span class="text_3_terms" tabindex="-1" (click)="openTerms(2)">Privacy Notice</span>
+  </div>
+
+</ion-content>

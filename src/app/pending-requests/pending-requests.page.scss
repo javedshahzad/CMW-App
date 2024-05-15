@@ -1,0 +1,455 @@
+
+.card_icon{
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.transfer_icon{
+    color: #000;
+}
+.early_icon{
+    color: #000;
+}
+.cards_section{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px rgb(0 0 0 / 15%);
+    background: #FFFFFF;
+    margin: 5px 5px 0px 5px; 
+    
+}
+
+.text_avl_lbl{
+    font-size: 13px;
+    font-family: Poppins;
+    color:#265CB2 !important;
+    font-weight: 600;
+    text-align: center
+}
+.column_main{
+    padding-right: 0px !important;
+}
+
+
+.back_icon{
+    color: #fff !important;
+}
+
+
+
+
+
+.main_sec{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    position: relative;
+}
+
+
+.date_sec{
+    display: flex;
+    flex-direction: column;
+    min-width: 73%;
+    padding-left: 15px;
+    margin-left: 15px;
+}
+
+
+.swap_card_sec{
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-top: 18px;
+}
+
+.label_date_text{
+    font-size: 14px;
+    font-weight: 600;
+    color: #265CB2;
+    padding-bottom: 4px;
+    font-family: "Poppins";
+}
+
+
+
+
+
+.date_cldout { 
+    display: flex;
+    align-items: center; 
+    margin-bottom: 6px;   
+}
+.day_text { margin-left: 5px; font-size: 12px; }
+.cld-icons { font-size: 16px; color: #265CB2;}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+    font-weight: 500;
+    
+  }
+
+  .statusbtns { 
+    //   display: inline-block;
+    // padding: 7px 10px;
+    // border-radius: 100px;
+    // width: 120px;
+    // text-align: center;
+    // color: #fff;
+    // font-size: 12px;
+    // margin-top: 10px;
+    display: flex; 
+    /* padding: 7px 10px; */
+    border-radius: 100px;
+    /* width: 120px; */
+    text-align: left;
+    // color: #fff;
+    /* font-size: 12px; */
+    /* margin-top: 10px; */
+    font-weight: 600;
+    // position: absolute;
+    // right: 6%;
+    // bottom: 6%;
+}
+
+
+
+.search_sect {
+    margin-bottom: 0px;
+    --padding-start:0px !important;
+    --inner-padding-end:0px !important;
+}
+
+.search_phrases { 
+    margin-top: 2%;
+    --border-radius: 10px;
+    /* --border: 2px solid blue; */
+    --box-shadow: 0px 0px 10px rgb(0 0 0 / 20%) !important;
+    /* border-color: blueviolet; */
+    width: 100%;
+    padding-inline-start: 10px !important;
+    padding-inline-end: 10px !important;
+    --padding-start:0px !important;
+    --inner-padding-end:0px !important
+}
+
+.nojobs{
+    position: absolute;
+    top: 50%;
+    margin: 0 auto;
+    text-align: center;
+    /* float: left; */
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Poppins' !important;
+
+  }
+
+  .no_jobs{
+    position: absolute;
+    top: 50%;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Poppins' !important;
+    background: #fff;
+    color: #000;
+}
+.cldoutTime{
+    // color: #000;
+    font-weight: 600;
+}
+.hour_value{
+    margin-left: 15%;
+    font-weight: 700;
+}
+
+.save_button {
+    --background: #265CB2;
+    --border-radius: 50px;
+    width: 80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+}
+
+.approve_button {
+    --background: #265CB2;
+    --border-radius: 50px;
+    width: 80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    // position: fixed;
+    // margin-left: -50%;
+    margin-right: 1;
+    z-index: 99;
+}
+
+.process_button {
+    --background: #54d085;
+    --border-radius: 50px;
+    width: 80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    // position: fixed;
+    // margin-left: -25%;
+    margin-right: 1;
+    z-index: 99;
+}
+
+.denied_button {
+    --background: #f96363;
+    --border-radius: 50px;
+    width: 80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    // position: fixed;
+    // margin-left: -25%;
+    margin-right: 1;
+    z-index: 99;
+}
+
+.arrow_list_sec {
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    right: 6px;
+}
+
+.button_section {
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    padding: 15px 10px;
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+    background: #fff;
+}
+
+
+ion-card.danger {
+    //   border-top:  4px solid #FF3535;
+    border-top: 4px solid #f96363;
+  }
+  ion-card.success {
+    // border-top:  4px solid #2dd36f;
+    border-top: 4px solid #54d085;
+  }
+  ion-card.primary {
+    // border-top:  4px solid #265CB2;
+    border-top: 4px solid #3b78d8;
+  }
+  ion-card.info {
+    // border-top: 4px solid #17a2b8;
+    border-top: 4px solid #1fb9d2;
+  }
+
+
+  .icon_plus {
+    color: #fff !important;
+    font-size: 28px;
+    font-weight: 800;
+  }
+  @media only screen 
+and (min-device-width: 360px) 
+and (max-device-width: 375px) 
+{
+   
+    
+    .date_sec{
+        min-width: 71% !important;
+    }
+}
+
+
+@media (min-width: 376px) and (max-width: 410px) { 
+    .date_sec{
+        min-width: 69% !important;
+    }
+ }
+
+@media (min-width: 320px) and (max-width: 359px) { 
+   
+    .date_sec{
+        min-width: 69% !important;
+        padding-left: 7px !important;
+        margin-left: 7px !important;
+    }
+ }
+ 
+ @media (min-width: 768px) and (max-width: 1024px) { 
+    .back_icon{
+         font-size: 35px;
+    }
+    .icon_right{
+        font-size: 30px;
+    }
+
+    .text_time {
+        font-size: 20px !important;
+    }
+    .day_text{
+        font-size: 18px;
+    }
+    .cld-icons{
+        font-size: 20px;
+    }
+    .label_date_text{
+        font-size: 21px;
+    }
+    .arrow_sec{
+        font-size: 35px !important;
+    }
+    
+    .icon_plus {
+        font-size: 35px;
+    }
+    .time_sec{
+      min-width: 18%;
+    }
+    .date_sec{
+        min-width: 70% !important;
+    }
+.swap_card_sec{
+    padding: 5px 5px !important;
+}
+
+.day_text{
+    font-size: 17px !important;
+}
+ }
+ @media (min-width: 600px) and (max-width: 767px) { 
+    .back_icon{
+         font-size: 35px;
+    }
+    .icon_right{
+        font-size: 30px;
+    }
+
+    .text_time {
+        font-size: 20px !important;
+    }
+    .day_text{
+        font-size: 18px;
+    }
+    .cld-icons{
+        font-size: 20px;
+    }
+    .label_date_text{
+        font-size: 21px;
+    }
+    .arrow_sec{
+        font-size: 35px !important;
+    }
+    
+    .icon_plus {
+        font-size: 35px;
+    }
+    .time_sec{
+      min-width: 18%;
+    }
+    .date_sec{
+        min-width: 70% !important;
+    }
+.swap_card_sec{
+    padding: 5px 5px !important;
+}
+
+.day_text{
+    font-size: 17px !important;
+}
+ }
+
+ .no_jobs{
+    position: absolute;
+    top: 50%;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Poppins' !important;
+    background: #fff;
+    color: #000;
+}
+ ion-item.popup_inputs {
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 8px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 95%;
+  }
+@media (max-width: 575.98px) { 
+    // .text_avl_lbl{
+    //     font-size: 12px;
+        
+    // }
+    .cards_section { padding: 12px;}
+    // .title_header{
+    //     font-size: 14px;
+    // }
+ }
+
+
+ @media only screen 
+ and (min-device-width: 320px) 
+ and (max-device-width: 340px) 
+ {
+   .title_header{
+         font-size: 14px !important;
+     }
+     .text_avl_lbl{
+         font-size: 11px;
+        
+         
+     }
+ }
+ 
+@media (min-width: 768px) and (max-width: 1024px) { 
+
+    .cards_section{
+        min-height: 121px !important;
+    }
+    .transfer_icon{
+        font-size: 40px;
+    }
+    .text_avl_lbl{
+        font-size: 21px;
+    }
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+   
+    .cards_section{
+        min-height: 121px !important;
+    }
+    .transfer_icon{
+        font-size: 35px;
+    }
+    .text_avl_lbl{
+        font-size: 20px;
+    }
+}
+
+
+

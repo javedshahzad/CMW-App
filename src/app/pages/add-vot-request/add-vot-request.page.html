@@ -1,0 +1,136 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+     <ion-title *ngIf="!offer" class="title_header">
+      Add
+      Voluntary Overtime request
+    </ion-title>
+    <ion-title *ngIf="offer" class="title_header">
+      Edit Voluntary Overtime request
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content">
+  <div class="main_sec" no-bounce>
+    <div class="form">
+      <form [formGroup]="offerForm" class="list-form" *ngIf="offerForm">
+
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>I would like to work on</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs"
+          [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.dateToWork.errors }" lines="none">
+          <!-- <input type="text" class="login_input custom_inp" name="endDate" placeholder="MM-DD-YYYY" bsDatepicker
+            (bsValueChange)="workDateChange($event)" (onShown)="hideKey()"  [minDate]="today" formControlName="dateToWork" name="from"
+            [bsConfig]="bsConfig" /> -->
+            <ion-datetime
+            [formControl]="offerForm.controls['dateToWork']"
+            class="login_input custom_inp" 
+            name="endDate"
+            name="from"
+            placeholder="MM/DD/YYYY"
+            displayFormat="MM/DD/YYYY"
+            [min]='minDate'
+            [max]='maxYear'
+            (ionChange)="workDateChange($event)"
+            (onShown)="hideKey()"
+          ></ion-datetime>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['dateToWork']" [messages]="messageList.dateToWork">
+        </app-validation-message>
+
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Requested Department </ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs"
+          [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.departmentId.errors }" lines="none">
+          <ion-select class="select_company" formControlName="departmentId" (ionChange)="onDepartmentChange($event)" [interfaceOptions]="departOptions" placeholder="Select Department">
+            <!-- <ion-select-option disabled value=''>Select Department
+            </ion-select-option> -->
+            <ion-select-option *ngFor="let department of departmentList" [value]="department.departmentId">
+              {{department.departmentName}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['departmentId']" [messages]="messageList.departmentId">
+        </app-validation-message>
+
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Shift to work on </ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs"
+          [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.shiftToWork.errors }" lines="none">
+          <ion-select class="select_company" formControlName="shiftToWork" (ionChange)="onShiftChange($event)" [interfaceOptions]="shiftOptions" placeholder="Select Shift">
+            <!-- <ion-select-option disabled value=''>Select Shift
+            </ion-select-option> -->
+            <ion-select-option *ngFor="let shift of shiftList" [value]="shift.shiftId">
+              {{shift.title}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['shiftToWork']" [messages]="messageList.shiftToWork">
+        </app-validation-message>
+
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Time</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs"
+          [ngClass]="{'popoup_input_space': isSubmitted && this.offerForm.controls.timeType.errors }" lines="none">
+          <ion-select class="select_company" formControlName="timeType" [interfaceOptions]="timeOptions" placeholder="Select Time">
+            <!-- <ion-select-option disabled value=''>Select Time
+            </ion-select-option> -->
+            <ion-select-option *ngFor="let time of timeList" [value]="time.id">
+              {{time.value}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-validation-message [control]="offerForm.controls['timeType']" [messages]="messageList.timeType">
+        </app-validation-message>
+
+        <ng-container *ngIf="HourEarly.Enable==true">
+          <ion-item lines="none" class="popoup_label">
+            <ion-checkbox class="bigCheckbox" formControlName="isHourEarly" slot="start" mode="md" value="isHourEarly">
+            </ion-checkbox>
+            <ion-label id="term">{{HourEarly.Name}}</ion-label>
+          </ion-item>
+        </ng-container>
+
+        <ng-container *ngIf="HourLate.Enable==true">
+          <ion-item lines="none" class="popoup_label">
+            <ion-checkbox class="bigCheckbox" slot="start" mode="md" (click)="$event.stopPropagation();"
+              (ionChange)="checkBoxClick()" formControlName="isHourLate" value="isHourLate">
+            </ion-checkbox>
+            <ion-label id="term">{{HourLate.Name}}</ion-label>
+          </ion-item>
+        </ng-container>
+        
+        <ion-item lines="none" class="popoup_label">
+          <ion-label  class="agree_terms">{{role === roleEnum.manager ? disclaimer: hrOfferText}}</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="popup_inputs_editor">
+           <ckeditor class="ck-editor__editable_inline" [editor]="Editor" formControlName="termsMsg" [disabled]="true">
+          </ckeditor> 
+        </ion-item>
+      </form>
+    </div>
+
+    <ion-row class="btn_sec" *ngIf="offerForm">
+      <ion-col col-md-4>
+        <div class="button_section save_btn">
+          <ion-button class="save_button" (click)="onSubmit()">Save</ion-button>
+        </div>
+      </ion-col>
+      <ion-col col-md-4>
+        <div class="button_section cncl_btn">
+          <ion-button class="cancel_button outline-button" fill="outline" (click)="closeModal()">Cancel</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

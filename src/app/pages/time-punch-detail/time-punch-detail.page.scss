@@ -1,0 +1,168 @@
+#logn_text{
+    font-size: 22px !important;
+}
+
+.back_icon{
+    color: #fff !important;
+}
+
+.main_sec{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 3% !important;
+    margin-left: 1% !important;
+}
+
+.accept_button{
+    --background: #265CB2;
+    --border-radius: 50px;
+    width:80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    float: left;
+}
+
+.cancel_button{
+    --background: #f8fafc;
+    --border-radius: 50px;
+    color:  #265CB2;
+    width:80px;
+    height: 27px;
+    font-weight: 500;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    float: left;
+}
+
+.pending_lbl{
+    display: inline-block;
+    display: inline-block;
+    // background: #FF3535;
+    padding: 7px 10px;
+    border-radius: 100px;
+    width: 120px;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    margin-top: 4px;
+    font-weight: 500;
+    font-family: "Poppins";
+    float: left;
+    margin-bottom: 7px;
+}
+
+.pending_lbl.danger{
+    background: #FF3535 !important;
+}
+
+.pending_lbl.primary{
+    background: #265CB2 !important;
+}
+
+.pending_lbl.success{
+    background: #2dd36f !important;
+}
+.pending_lbl.info{
+    background: #17a2b8 !important;
+}
+ 
+.outline-button {
+	--border-color: #265CB2;
+}
+
+.btn_sec{
+    margin-top: 1%;
+    padding-bottom: 4%;
+}
+
+.popoup_label{
+    font-family: "Poppins" !important;
+    font-weight: 550;
+    padding-top: 2%;
+    --padding-start: 0px !important;
+    --padding-bottom: 0px !important;
+}
+
+.cld-icons { font-size: 16px;}
+
+.icon_label{
+    color: #808080ed;
+    font-weight: 500;
+    margin: 0 !important;
+}
+.textlbl{
+    margin: 0 !important;
+}
+
+.date_span{
+    margin-left: 6px;
+}
+
+.cal_label{
+    margin: 5px auto 14px auto;
+}
+.popup_div{
+     padding: 6px;
+ }
+ .login_card.swap{
+     padding: 0 !important;
+ }
+ .popup_div{
+    padding: 5px !important;
+    margin-left: 4%;
+ }
+
+ 
+ @media (min-width: 768px) and (max-width: 1024px) { 
+    .back_icon{
+         font-size: 35px;
+    }
+    .popoup_label{
+        font-size: 22px !important;
+    }
+    .accept_button {
+        width: 127px;
+        height: 41px;
+        margin-right: 10px;
+        font-size: 20px;
+    
+        }
+        .cancel_button{
+            width: 127px;
+            height: 41px;
+            font-size: 20px;
+        }
+        .pending_lbl {
+            width: 226px;
+            height: 48px;
+            font-size: 20px;
+        }
+ }
+ @media (min-width: 600px) and (max-width: 767px) { 
+    .back_icon{
+         font-size: 35px;
+    }
+    .popoup_label{
+        font-size: 22px !important;
+    }
+    .accept_button {
+        width: 127px;
+        height: 41px;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+        .cancel_button{
+        width: 127px;
+        height: 41px;
+        font-size: 20px;
+        }
+        .pending_lbl {
+            width: 226px;
+            height: 48px;
+            font-size: 20px;
+        }
+ }

@@ -1,0 +1,18 @@
+<ion-header [translucent]="true" class="search_head" style="background-color: #fff;">
+  <ion-toolbar mode="ios" class="header" style="border-bottom: 1px solid rgb(194, 192, 192);">
+    <ion-buttons slot="start">
+      <ion-menu-button class="header-icon" menu="main-menu" autoHide='false'></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="header-name terms-title">{{title}}</ion-title>
+    <ion-buttons style="width: 8%;" class="btn_sec" slot="end" (click)="closeModal()">
+      <ion-icon name="close" class="add-btn"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content" style="background-color: #fff;">
+  <div class="main_sec" [innerHtml]="content" *ngIf="contentType === type.TNC" no-bounce>
+  </div>
+
+</ion-content>

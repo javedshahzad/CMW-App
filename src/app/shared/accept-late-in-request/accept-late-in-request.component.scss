@@ -1,0 +1,92 @@
+.btn-primary {
+  min-width: 100px !important;
+  width: 130px !important;
+}
+.add_rol_modal {
+  .modal-header {
+    padding: 1.325rem 1.875rem 1.325rem 1.5rem;
+    .modal-title {
+      font-weight: normal;
+      line-height: normal;
+      font-size: 1.125rem;
+      color: darkblue;
+    }
+  }
+  .modal-footer {
+    border-top: 1px solid aliceBlue !important;
+    display: inline-block !important;
+    padding: 1rem 1.5rem;
+    width: 100%;
+  }
+}
+.close_popup {
+  cursor: pointer;
+  //float: right;
+  color: blue !important;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+::ng-deep {
+  .modal-body {
+    padding: 1.5rem;
+    &.add_early_go_popup {
+      label {
+        font-weight: normal;
+        line-height: 20px;
+        font-size: 0.875rem;
+        color: black;
+      }
+    }
+  }
+  .modal-footer {
+    display: block;
+    padding: 1.5rem;
+  }
+}
+h4 {
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #5791ff !important;
+}
+.bigCheckbox {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.error {
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 3px;
+}
+.container {
+  border: 1px dashed #000;
+  margin-bottom: 20px;
+  // width: 100%;
+}
+.info-title{
+  background:#0062cc;
+  color:#fff;
+  padding: 5px 15px;
+  text-align: center;
+ 
+}
+
+.info-title-hr{
+  background:#00b050;
+  color:#fff;
+  padding: 5px 15px;
+  text-align: center;
+}
+
+.info-title span{
+  font-weight: 400;
+ 
+}
+.approve-fields{
+  border-bottom: 1px solid #dfdfdf;
+}

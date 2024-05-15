@@ -1,0 +1,13 @@
+<ng-template #confTemplate>
+  <div class="add_rol_modal">
+    <div class="modal-body pb-3 add_user_popup text-center">
+      {{text}}
+    </div>
+    <div class="modal-footer text-center" style="display: flex !important;">
+      <a class="btn btn-primary" (click)="onClick()"> {{btnSaveText}}</a>
+      <a class="btn btn-primary ml-2" (click)="closeModal(false)">
+        {{btnCancleText}}
+      </a>
+    </div>
+  </div>
+</ng-template>

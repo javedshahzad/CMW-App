@@ -1,0 +1,58 @@
+.add_rol_modal {
+  .modal-header {
+    padding: 1.325rem 1.875rem 1.325rem 1.5rem;
+    .modal-title {
+      font-weight: normal;
+      line-height: normal;
+      font-size: 1.125rem;
+      color: darkblue;
+    }
+  }
+  .modal-footer {
+    border-top: 1px solid aliceBlue !important;
+    display: inline-block !important;
+    padding: 1rem 1.5rem;
+    width: 100%;
+  }
+}
+.close_popup {
+  cursor: pointer;
+  // float: right;
+  color: blue !important;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+::ng-deep {
+  .modal-body {
+    padding: 1.5rem;
+    &.add_user_popup {
+      label {
+        font-weight: normal;
+        line-height: 20px;
+        font-size: 0.875rem;
+        color: gray;
+      }
+    }
+  }
+  .modal-footer {
+    display: block;
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 575.98px) {
+  .text-sizd {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .text-sizd {
+    font-size: 20px;
+  }
+}
+
+.submit-btn{
+  margin-left: 7%;
+}
+

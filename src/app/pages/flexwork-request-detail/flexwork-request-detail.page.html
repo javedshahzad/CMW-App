@@ -1,0 +1,207 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-title class="title_header">Flex Work Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="FlexWorkData">
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Flex Request Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{FlexWorkData.FlexTypestr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action!='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Department</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{FlexWorkData.departmentName}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action!='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Flex Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="extension-puzzle" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.FlexTypestr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.dateToSkipDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action!='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Shift</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.shiftToSkipTitle}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Start Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="time" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.startTimeToShow}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">End Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="time" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.endTimeToShow}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.timeTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Shift</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.shiftToSkipTitle}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label"
+        *ngIf="FlexWorkData.action=='isRequestedOffer' && FlexWorkData.processedByObj!=null">
+        <div class="popup_div">
+          <ion-label class="textlbl">Processed By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.processedByObj.companyUsername}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label"
+        *ngIf="FlexWorkData.action=='isRequestedOffer' && FlexWorkData.processedByObj==null">
+        <div class="popup_div">
+          <ion-label class="textlbl">Offer By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.createdByUsername}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action!='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Available Slots</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.vtoCount}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="FlexWorkData.action!='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Offer By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="person-circle" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{FlexWorkData.createdByUsername}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl info" *ngIf="FlexWorkData.status === offerStatus.available">
+                {{FlexWorkData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl primary" *ngIf="FlexWorkData.status === offerStatus.pendingProceed">
+                {{FlexWorkData.offerStatusStr}}
+              </ion-label>
+              <ion-label class="pending_lbl primary" *ngIf="FlexWorkData.status === offerStatus.proceed">
+                {{FlexWorkData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="FlexWorkData.status === offerStatus.accepted">
+                {{FlexWorkData.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+      <div class="btn_sec" *ngIf="FlexWorkData.status === offerStatus.available">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+              <ng-container *ngIf="FlexWorkData.status === offerStatus.available">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(FlexWorkData)">Accept</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

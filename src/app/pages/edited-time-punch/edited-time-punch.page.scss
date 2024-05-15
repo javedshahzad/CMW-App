@@ -1,0 +1,284 @@
+
+.back_icon{
+  color: #fff !important;
+}
+
+.icon_right{
+  color: #fff !important;
+}
+.icon_plus{
+  color: #fff !important;
+  font-size: 28px;
+  font-weight: 800;
+}
+.header_label{
+  line-height: 32px;
+  background: #F4F4F4 !important;
+  width: 100%;
+  color: #666666;
+  margin-top: 15px;
+}
+
+.label_section_date{
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-family: 'Poppins';
+  margin-left: 20px;
+}
+
+
+.main_sec{
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+}
+
+.time_sec{
+  display: flex;
+  flex-direction: column;
+  --background-color: none;
+  border-radius: 2px;
+}
+.date_sec{
+  display: flex;
+  flex-direction: column;
+  min-width: 73%;
+  border-left: 2px solid #ABB2BC;
+  padding-left: 15px;
+}
+
+
+.swap_card_sec{
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-top: 18px;
+}
+
+.label_date_text{
+  font-size: 14px;
+  font-weight: 600;
+  color: #265CB2;
+  padding-bottom: 4px;
+  font-family: "Poppins";
+}
+
+.text_time{
+  font-weight: 700;
+  color: #333;
+  font-size: 12px !important;
+}
+
+.text_time.btmsppace{
+  padding-bottom: 4px;
+}
+.arrow_sec{
+  font-size: 24px;
+  font-weight: 600;
+  color: #265CB2;
+}
+
+.date_cldout { 
+  display: flex;
+  align-items: center;    
+}
+.day_text { margin-left: 5px;     font-size: 12px; }
+.cld-icons { font-size: 16px;
+color: #265CB2;}
+
+.badge-danger {
+  color: #fff;
+  background-color: #dc3545;
+  font-weight: 500;
+  
+}
+
+.statusbtns { 
+  display: flex; 
+  border-radius: 100px;
+  text-align: left;
+  font-weight: 600;
+
+}
+
+
+
+.search_sect {
+  margin-bottom: 0px;
+  --padding-start:0px !important;
+  --inner-padding-end:0px !important;
+}
+
+.search_phrases { 
+  margin-top: 2%;
+  --border-radius: 10px;
+  --box-shadow: 0px 0px 10px rgb(0 0 0 / 20%) !important;
+  width: 100%;
+  padding-inline-start: 10px !important;
+  padding-inline-end: 10px !important;
+  --padding-start:0px !important;
+  --inner-padding-end:0px !important
+}
+
+
+.no_jobs{
+  position: absolute;
+  top: 50%;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+  font-family: 'Poppins' !important;
+  background: #fff;
+  color: #000;
+}
+.cldoutTime{
+  font-weight: 600;
+}
+.hour_value{
+  margin-left: 15%;
+  font-weight: 700;
+}
+
+ion-card.danger{
+border-top: 4px solid #f96363;
+}
+ion-card.success{
+  border-top: 4px solid #54d085;
+}
+ion-card.primary{
+  border-top: 4px solid #3b78d8;
+}
+ion-card.info{
+  border-top: 4px solid #1fb9d2;
+}
+ion-searchbar{
+  --color: #000;
+  color: #000;
+}
+@media only screen 
+and (min-device-width: 360px) 
+and (max-device-width: 375px) 
+{
+  .text_time{
+      font-weight: 700;
+      color: #333;
+      font-size: 10px !important;
+  }
+
+  .time_sec{
+      display: flex;
+      flex-direction: column;
+      --background-color: none;
+      overflow: auto;
+      border-radius: 2px;
+  }
+}
+
+
+@media (min-width: 376px) and (max-width: 410px) { 
+  .time_sec{
+      display: flex;
+      flex-direction: column;
+      --background-color: none;
+      overflow: visible;
+      border-radius: 2px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) { 
+  .text_time{
+      font-weight: 700;
+      color: #333;
+  }
+  .date_sec{
+      min-width: 69% !important;
+      padding-left: 7px !important;
+      margin-left: 7px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+  .back_icon{
+       font-size: 35px;
+  }
+  .icon_right{
+      font-size: 30px;
+  }
+
+  .text_time {
+      font-size: 20px !important;
+  }
+  .day_text{
+      font-size: 18px;
+  }
+  .cld-icons{
+      font-size: 20px;
+  }
+  .label_date_text{
+      font-size: 21px;
+  }
+  .arrow_sec{
+      font-size: 35px !important;
+  }
+  
+  .icon_plus {
+      font-size: 35px;
+  }
+  .time_sec{
+    min-width: 18%;
+  }
+  .date_sec{
+      min-width: 70% !important;
+  }
+.swap_card_sec{
+  padding: 5px 5px !important;
+}
+
+.day_text{
+  font-size: 17px !important;
+}
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+  .back_icon{
+       font-size: 35px;
+  }
+  .icon_right{
+      font-size: 30px;
+  }
+
+  .text_time {
+      font-size: 20px !important;
+  }
+  .day_text{
+      font-size: 18px;
+  }
+  .cld-icons{
+      font-size: 20px;
+  }
+  .label_date_text{
+      font-size: 21px;
+  }
+  .arrow_sec{
+      font-size: 35px !important;
+  }
+  
+  .icon_plus {
+      font-size: 35px;
+  }
+  .time_sec{
+    min-width: 18%;
+  }
+  .date_sec{
+      min-width: 70% !important;
+  }
+.swap_card_sec{
+  padding: 5px 5px !important;
+}
+
+.day_text{
+  font-size: 17px !important;
+}
+}

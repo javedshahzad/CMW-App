@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-title class="title_header">Late In Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="LateInData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Arrival time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{LateInData.dateToSkipDateStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="time" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{LateInData.VtoStartTime12Hours}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <!-- <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">UTO</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{LateInData.uTOHours | number : '1.2'}} Hours</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item> -->
+      
+    
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Reason</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{LateInData.ReasonObj.name}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item class="popoup_label" *ngIf="LateInData.ReasonObj.name == 'Other Reason'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Reason</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <ion-textarea  readonly class="ck-editor__editable_inline">{{LateInData.OtherReason}}</ion-textarea>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+      <div class="button_section">
+        <ion-item class="popoup_label">
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+
+              <ion-label class="pending_lbl danger" *ngIf="LateInData.status === offerStatus.hrApproval">
+                {{LateInData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl danger" *ngIf="LateInData.status === offerStatus.pendingProceed">
+                {{LateInData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label class="pending_lbl success" *ngIf="LateInData.status === offerStatus.proceed">
+                {{LateInData.offerStatusStr}}
+              </ion-label>
+
+            </div>
+          </div>
+        </ion-item>
+      </div>
+
+      <div class="btn_sec" *ngIf="LateInData.status === offerStatus.pendingProceed">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+
+
+              <ng-container *ngIf="LateInData.status === offerStatus.pendingProceed">
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(LateInData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(LateInData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

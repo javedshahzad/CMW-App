@@ -1,0 +1,376 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "./assets/css/font-poppins.css";
+
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "../node_modules/leaflet/dist/leaflet.css";
+
+ion-content{
+  --background: #fff;
+  background: #fff;
+}
+ion-tab-bar{
+  --background:#fff;
+}
+ion-card{
+  background: #fff;
+}
+ion-item.search_sect{
+  --background:#fff;
+}
+ion-searchbar{
+  --color: #000;
+  color: #000;
+}
+
+ion-item{
+  --background:#fff;
+  --color:#000;
+}
+.login_sec{
+    margin-top: 20px;
+    float: left;
+    width: 100%;
+    text-align: center !important;
+    margin-bottom: 20px;
+}
+ion-item.section_inputs{
+    --highlight-height: 0;
+    margin-bottom: 15px !important;
+    margin: 0 auto;
+    --padding-start: 20px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+.login_card{
+    width: 86%;
+    text-align: center;
+    margin: 20px auto;
+    padding: 12px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+    border-radius: 30px;
+}
+
+.login_button{
+    --background:#265CB2;
+    --border-radius: 50px;
+    width: 100%;
+    min-height: 48px;
+    padding-left: 5px;
+    padding-right: 23px;
+    font-family: 'Poppins';
+}
+
+.select_company{
+    width: 100% !important;
+    --placeholder-color: #000000 !important;
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 14px;
+    color: #000000;    
+}
+
+.login_input{
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 14px;
+    color: #000000;
+}
+
+.sign_up_here{
+    color: #265CB2;
+    font-family: "Poppins";
+    padding-left: 5px;
+}
+
+.login_account_sect{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.login_information{
+    text-align: center;
+    width: 100%;
+    float: left;
+    margin-bottom: 4%;
+    align-items: center;
+    font-weight: 600;
+}
+
+.reg_lable{
+    text-align: right;
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 12px;
+    color: #484848;
+}
+
+.forgot_text{
+    --background: none;
+    color: #000000;
+    text-align: right;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+    --min-height: 31px !important;
+}
+
+.text_label_login{
+    color: #203E51 !important;
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+.login_account_text{
+    font-family: Poppins !important;
+    font-weight: 600;
+    // font-size: 22px !important;
+    color: #265CB2 !important;
+}
+
+ion-input.login_input {
+    --placeholder-color:black !important;
+    --placeholder-opacity: 1!important;
+}
+
+ion-select.select_company {
+    --placeholder-color:black !important;
+    --placeholder-opacity: 1!important;
+}
+
+ion-header{ 
+  --background:#265CB2;
+ion-toolbar.header_sec{
+    text-align: center;
+    --background:#265CB2;
+    --border-color:#265CB2;
+    --color :#FFFFFF;
+    --min-height:56px !important;
+    --opacity:1 !important;
+    // padding-top: 8px !important;
+    // padding-bottom: 8px !important;
+}
+}
+.title_header{
+    font-size: 17px;
+    font-family: Poppins;
+}
+
+.header-icon{
+    --color: #fff;
+}
+
+app-terms.ion-page{
+  ion-toolbar{
+    --background:#fff;
+    --color:#000;
+    padding: 0% !important;
+  }
+    border-radius: inherit;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    top: 0;
+    left: 0;
+    transform: (50% 50%);
+    transform: translate(0%, 9%);
+    border-radius: 15px !important;
+  }
+
+  app-allow-role.ion-page{
+    border-radius: inherit;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    top: 0;
+    left: 0;
+    transform: (50% 50%);
+    transform: translate(0%, 57%);
+    border-radius: 15px !important;
+  }
+
+  app-terms-condition.ion-page{
+    border-radius: inherit;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    top: 0;
+    left: 0;
+    transform: (50% 50%);
+    transform: translate(0%, 9%);
+    border-radius: 15px !important;
+  }
+
+  .add-request-swap_class{
+    --background: transparent;
+    --background: transparent !important;
+    background: transparent !important;
+  }
+
+  .delete-popo-up-class{
+    // color: black;
+    // background-color: var(--color);
+    // padding: 1.5rem;
+    // //text-align: center;
+    --background: #e5e5e5;
+  }
+
+  .terms_class{
+    --background: transparent;
+  }
+
+  .ck-editor__editable_inline.ck-blurred.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-read-only::after{
+      border:none !important
+  }
+
+  .ck-editor__editable_inline{
+    border:none !important
+  }
+  .custom_success_class{
+    font-size: 16px !important;
+    font-family: 'Poppins' !important;
+  }
+
+  .custom_error_class{
+    font-size: 14px !important;
+    font-family: 'Poppins' !important;
+    color: #fff;
+  }
+
+  .li-ionic4-datePicker {
+    .modal-wrapper {
+        height: 470px;
+        max-height: 100%;
+        width: 312px;
+        --ion-color-primary: #265CB2; // This Variable used for the change of colour ion-datepicker only.
+        --ion-color-primary-tint: rgb(214, 153, 153); // This Variable changes the tint colour of background when click button.
+        ion-button {
+            // --ion-color-primary: green; // This Variable used for the change colour of buttons only.
+            // --ion-color-primary-tint: lightgreen; // This Variable changes the tint color of background when click buttons.
+            // --border-radious: 0px; // This Variable changes the border radious of buttons.
+            // button customization css write here...
+        }
+    }
+  }
+
+  // Full screen modal
+  .modal-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+//   @media only screen and (min-width: 768px) and (min-height: 768px){
+// .sc-ion-modal-ios-h {
+//     --width: 821px;
+//     --height: 1182px;
+// }
+// }
+  @media only screen and (min-height: 600px) and (min-width: 768px){
+
+.sc-ion-modal-md-h{
+    --box-shadow: none !important;
+}
+.sc-ion-modal-ios-h{
+  --box-shadow: none !important;
+  --border-radius: 0;
+}
+app-add-vot-request.ion-page, app-add-request-swap.ion-page, app-add-edit-call-in-request.ion-page, app-add-edit-early-go-request.ion-page{
+ 
+  //transform: translate(0%, 16%);
+// margin-top: 0% !important;
+height: 100% !important;
+ 
+}
+  }
+  timepicker  {
+    button.btn{
+      background-color: #f2f2f2 !important;
+    }
+    button.btn:focus{
+     box-shadow: none !important;
+     border-color: transparent !important;
+   
+ }
+ .form-control:focus{
+  box-shadow: none !important;
+  border-color: transparent !important;
+ }
+}
+@media only screen and (min-height:720px){
+  .login_sec{
+    margin-top: 40px !important;
+  }
+}
+.ck.ck-editor__top.ck-reset_all{
+  width: 100% !important;
+}
+app-add-edit-early-go-request.ion-page{
+.ck.ck-toolbar{
+  border: 0 !important;
+}
+}
+.btn_add{
+  width: 8%;
+  font-size: 22px;
+}
+
+app-clock-in-out-filter.ion-page{
+  border-radius: inherit;
+  width: 90%;
+  height: 40%;
+  margin: 0 auto;
+  position: absolute;
+  transform: (50% 50%);
+  transform: translate(0%, 9%);
+  border-radius: 15px !important;
+  margin-top: 30%;
+}
+
+app-available-locations.ion-page{
+  border-radius: inherit;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    top: 0;
+    left: 0;
+    transform: (50% 50%);
+    transform: translate(0%, 31%);
+    border-radius: 15px !important;
+}
+
+.process-btn{
+  font-weight:bold; 
+  color: red;
+}

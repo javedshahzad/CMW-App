@@ -1,0 +1,157 @@
+<ion-content>
+  <div class="login_sec">
+    <img src="../../../assets/images/logo.png" style="width: 65%;">
+  </div>
+  <form class="list-form" [formGroup]="signUpForm" *ngIf="signUpForm">
+    <ion-card class="login_card">
+      <ion-item lines="none" class="login_account_sect">
+        <ion-label class="login_account_text" id="logn_text">SignUp with {{appName}}</ion-label>
+      </ion-item>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.companyId.errors }" lines="none">
+        <ion-select class="select_company" formControlName="companyId"  placeholder="Select Company"
+          (ionChange)="onCompanyChange($event)">
+          <ion-select-option *ngFor="let company of companyList" [value]="company.companyId"> {{company.companyName}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['companyId']" [messages]="messageList.companyId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.locationId.errors }" lines="none">
+        <ion-select class="select_company"  placeholder="Select Location"
+          formControlName="locationId" (ionChange)="onLocationChange($event)">
+          <ion-select-option *ngFor="let location of locationList" [value]="location.locationId">
+            {{location.locationName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['locationId']" [messages]="messageList.locationId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.departmentId.errors }" lines="none">
+        <ion-select class="select_company"  placeholder="Select Department"
+          formControlName="departmentId" (ionChange)="onDepartmentChange($event)">
+          <ion-select-option *ngFor="let department of departmentList" [value]="department.departmentId">
+            {{department.departmentName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['departmentId']" [messages]="messageList.departmentId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.subDepartmentId.errors }" lines="none">
+        <ion-select class="select_company"  placeholder="Select Sub Department"
+          formControlName="subDepartmentId">
+          <ion-select-option *ngFor="let subdepartment of subDepartmentList" [value]="subdepartment.subDepartmentId">
+            {{subdepartment.subDepartmentName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['subDepartmentId']"
+        [messages]="messageList.subDepartmentId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.shiftId.errors }" lines="none">
+        <ion-select class="select_company"  placeholder="Select Shift" formControlName="shiftId">
+          <ion-select-option *ngFor="let shift of shiftList" [value]="shift.shiftId">{{shift.title}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['shiftId']" [messages]="messageList.shiftId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.name.errors }" lines="none">
+        <ion-input type="text" class="login_input" placeholder="Name" formControlName="name"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['name']" [messages]="messageList.name">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.phone.errors }" lines="none">
+        <input type="text" class="login_input input_custom" name="phone" placeholder="Phone Number"
+          formControlName="phone" [imask]="phoneMask">
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['phone']" [messages]="messageList.phoneNumber">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.emailId.errors }" lines="none">
+        <ion-input type="text" class="login_input" placeholder="Email" formControlName="emailId"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['emailId']" [messages]="messageList.email">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.companyUsername.errors }" lines="none">
+        <ion-input type="text" class="login_input" placeholder="Username" (ionBlur)="checkValidUser()"
+          formControlName="companyUsername"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['companyUsername']"
+        [messages]="messageList.companyUsername">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.employeeId.errors }" lines="none">
+        <ion-input type="text" class="login_input" placeholder="Employee Id" (ionBlur)="checkValidUser()"
+          formControlName="employeeId"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['employeeId']" [messages]="messageList.employeeId">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.password.errors }" lines="none">
+        <ion-input type="password" class="login_input" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['password']" [messages]="messageList.password">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.confirmPassword.errors }" lines="none">
+        <ion-input type="password" class="login_input" placeholder="Confirm Password" formControlName="confirmPassword">
+        </ion-input>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['confirmPassword']"
+        [messages]="messageList.confirmPassword">
+      </app-validation-message>
+
+      <ion-item class="section_inputs pwd"
+        [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.GetCommunicationMethod.errors }"
+        lines="none">
+        <ion-select multiple="true" class="select_company"  placeholder="Communication Method"
+          formControlName="GetCommunicationMethod" [value]="selectedItems" (ionChange)="changeValue($event)">
+          <ion-select-option [value]="option" *ngFor="let option of dropdownList">{{option.text}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-message [control]="signUpForm.controls['GetCommunicationMethod']"
+        [messages]="messageList.GetCommunicationMethod">
+      </app-validation-message>
+      <ion-item class="section_inputs pwd"
+      [ngClass]="{'input_space': isSubmitted && this.signUpForm.controls.GetCommunicationMethod.errors }"
+      lines="none" *ngIf="isShowManager">
+      <ion-select class="select_company"  placeholder="Select Manager" formControlName="managerId">
+        <ion-select-option *ngFor="let manageruser of managerUserList" [value]="manageruser.userId">{{manageruser.name}}</ion-select-option>
+      </ion-select>
+      </ion-item>
+
+      <div class="terms_condition_item" lines="none">
+        <div class="terms">
+          <ion-checkbox class="checkbox_terms" slot="start" mode="md" formControlName="isRecievingTextMessage">
+          </ion-checkbox>
+          <ion-label id="term">I consent to receive automated text messages and pre-recorded voice messages from my employer at the telephone number provided by me during the registration regarding any matter related to my employment such as emergency situation notifications, weather-related closures, shift opportunities, overtime opportunities, or other company-related news.
+          </ion-label>
+        </div>
+      </div>
+
+      <div class="button_section">
+        <ion-button [disabled]="isValidUser" (click)="onSubmit()" class="login_button">Create Account</ion-button>
+      </div>
+    </ion-card>
+  </form>
+  <div class="sign_up_section fpLink"> Already have Account<strong>
+      <span class="sign_up_here" (click)="redirectToSignIn();">Sign In</span>
+    </strong><br>
+  </div>
+</ion-content>

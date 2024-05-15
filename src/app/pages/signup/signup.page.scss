@@ -1,0 +1,137 @@
+#logn_text{
+    font-size: 18px;
+}
+
+.sign_up_section{
+    text-align: center;
+    padding-top: 0px;
+    font-family: "Poppins";
+    padding-bottom: 20px;
+    color: #000;
+}
+.label_checkbox_terms{
+    font-size: 14px;
+    line-height: 18px !important;
+    word-break: initial;
+    position: relative;  
+}
+.checkbox_terms{
+    float: left;
+    width: 20px;
+    margin-top: 3px;
+    --border-color: rgb(0 0 0 / 30%);
+    --background:#fff;
+}
+.terms_condition_item{
+    width: 98%;
+    margin: 0 auto;
+}
+.terms{
+    width:100%;
+    justify-content: space-evenly;
+    text-align: left;
+    margin: 5px auto 10px 0; 
+    display: inline-block;
+    line-height: 18px;
+    
+}
+#term{
+    font-size: 14px !important;
+    color: #383838;
+    float: left;
+    width: 88%;
+    font-weight:600;
+    margin-left: 8px;
+}
+ion-checkbox{
+    --size:20px;
+}
+
+.input_custom{
+    outline: none;
+    border: none;
+    color: black !important;
+    background: #fff;
+
+}
+
+.input_custom::placeholder { 
+    color:black;
+  }
+
+  ion-item.input_space{
+    margin-bottom: 0px !important;
+    --highlight-height: 0;
+    margin: 0 auto;
+    --padding-start: 20px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    #term { width: 93%;}
+    
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    #term { width: 95%;}
+}
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    #term { width: 95%;}
+}
+
+@media only screen 
+and (min-device-width: 360px) 
+and (max-device-width: 375px) 
+{
+    
+    .terms_conditions{
+        position: absolute;
+        bottom: 3%;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        padding: 0 2%;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) { 
+    #logn_text{
+    font-size: 30px !important;
+    }
+    #term{
+        font-size: 21px !important;
+        line-height: 22px;
+    }
+    .login_button{
+        font-size: 24px;
+    }
+    .sign_up_section{
+        font-size: 25px;
+    }
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+    #logn_text{
+    font-size: 30px !important;
+    }
+    #term{
+        font-size: 21px !important;
+        line-height: 22px;
+    }
+    .login_button{
+        font-size: 24px;
+    }
+    .sign_up_section{
+        font-size: 25px;
+    }
+}
+@media (max-width: 320px) { 
+    #logn_text{
+        overflow: auto;
+        white-space: normal;
+    }
+ }
+
+

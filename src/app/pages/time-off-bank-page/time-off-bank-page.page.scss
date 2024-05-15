@@ -1,0 +1,65 @@
+.back_icon {
+  color: #fff !important;
+}
+
+.icon_plus {
+  color: #fff !important;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+ion-slide:hover {
+  //background: rgba(205, 9, 9, 0.43);
+  cursor: pointer;
+}
+.daysinput {
+  font-size: 28px !important;
+  margin-left: 10%;
+  margin-right: 10%;
+  //margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+ion-slide {
+  width: 150px !important;
+  height: 200px !important;
+  background-color: #fff;
+  float: left;
+  margin-left: 4.5px !important;
+  margin-right: 4.5px !important;
+  margin-bottom: 10px !important;
+  border-radius: 10px !important;
+  border: 2px solid #3b78d8;
+}
+ion-slides {
+  //background-color: rgba(194, 193, 194, 0.52);
+  margin-top: 10px !important;
+}
+.hoursText {
+  color: #3b78d8;
+}
+.info {
+  background: #1fb9d2;
+  height: 47px;
+  width: 147px;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  margin-top: 35px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statusline {
+  font-size: 16px;
+  color: #ffff;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+@media (min-width: 480px) and (max-width: 580px) {
+  .slide {
+    width: 460px !important;
+  }
+}

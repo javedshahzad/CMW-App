@@ -1,0 +1,256 @@
+ion-toolbar{
+    --background:#fff;
+    --color:#000;
+}
+
+.main_sec{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5% !important;
+}
+
+ion-select{
+    --padding-start:16px !important;
+    font-family: 'Poppins' !important;
+}
+
+.search_head{
+    max-height: 55px !important;
+}
+
+.terms-title{
+    font-family: Poppins !important;
+    font-weight: 600;
+    color: #265CB2 !important;
+    font-size: 15px !important;
+}
+
+.save_button{
+    --background: #265CB2;
+    --border-radius: 50px;
+    width:80px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    margin-left: 54%;
+}
+
+.cancel_button{
+    --background: #f8fafc;
+    --border-radius: 50px;
+    color:  #265CB2;
+    width:80px;
+    height: 27px;
+    font-weight: 500;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+}
+
+.outline-button {
+	--border-color: #265CB2;
+}
+
+.btn_sec{
+    margin-top: 13%;
+}
+.back_icon{
+    color: #fff !important;
+}
+ion-item.popup_inputs{
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 8px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+ion-item.editor_input{
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 8px !important;
+    --padding-start: 10px !important;
+    // border: 1px solid #E4E4E4;
+    // box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    // border-radius: 6px;
+    width: 98%;
+}
+.popoup_label{
+    font-family: 'Poppins' !important;
+    font-weight: 550;
+    width: 98%;
+    --min-height: 0px !important;
+}
+
+.search_head.header-md::after, .menuheader.header-ios::after{ background-image:none; }
+
+.save_btn{
+    margin-right: 10px
+}
+.cncl_btn{
+    margin-left: 10px;
+}
+.agree_terms{
+    font-size: 15px !important;
+}
+
+ion-item.popoup_input_space{
+    --highlight-height: 0;
+    margin: 0 auto;
+    margin-bottom: 2px !important;
+    --padding-start: 10px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 98%;
+}
+
+.custom_label{
+    white-space: normal !important;
+    text-overflow: none;
+}
+
+.custom_inp{
+    outline: none;
+    border: none;
+    color: black !important;
+    width: 100% !important;
+    background: #fff;
+}
+
+.custom_inp::placeholder {
+    color:black;
+  }
+
+.validation_error{
+    margin-bottom: 1% !important;
+}
+
+.custom_ckeditor{
+    height: 158px !important;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+   max-width: 100% !important;
+}
+
+.checkbox_terms{
+    float: left;
+    width: 20px;
+    margin-top: 3px;
+   // margin-right: 1%;
+}
+.terms_condition_item{
+    width: 100%;
+    margin: 0 auto;
+}
+.terms{
+    width:100%;
+    justify-content: space-evenly;
+    text-align: left;
+    margin: 5px auto 10px 0;
+    display: inline-block;
+    //line-height: 18px;
+
+}
+#term{
+    font-size: 14px !important;
+    color: #383838;
+    float: left;
+    width: 88%;
+    font-weight:600;
+   // margin-left: 8px;
+}
+
+.cb_space{
+    margin-top: -5%;
+}
+
+ion-checkbox{
+    --size:20px;
+}
+.note{
+    white-space: normal;
+    overflow: auto;
+
+}
+.hours_sec{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+}
+ion-item.hour{
+    width: 75% !important;
+    margin: 0 !important;
+    --background:#f2f2f2;
+}
+ion-input.hour{
+    border: none !important;
+    background: #f2f2f2;
+
+}
+
+.time_sec{
+    width: 100%;
+}
+
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 375px)
+{
+
+    .terms-title{
+        font-size: 14px !important;
+    }
+    :host ::ng-deep .terms-title {
+        padding-inline: 86px !important;
+     }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+    :host ::ng-deep .terms-title {
+        padding-inline: 60px !important;
+     }
+     .hrlbl{
+        overflow: auto;
+        white-space: normal;
+     }
+
+ }
+ @media (min-width: 768px) and (max-width: 1024px) {
+    .save_button, .cancel_button{
+        width: 90px !important;
+        height: 35px !important;
+       font-size: 16px !important;
+    }
+ }
+ @media (min-width: 600px) and (max-width: 767px) {
+    .save_button, .cancel_button{
+        width: 90px !important;
+        height: 35px !important;
+       font-size: 16px !important;
+    }
+ }
+ div.popup_inputs{
+     display: flex;
+     flex-direction: column;
+     display: flex;
+    flex-direction: column;
+    border: 1px solid #E4E4E4;
+    padding: 4%;
+    box-shadow: 0px 0px 4px rgb(113 113 113 / 20%);
+}
+timepicker.Timepicker{
+    margin-top: 3%;
+}
+ion-item.time-off{
+    max-height: 115px !important;
+    --padding-top: 10px;
+}

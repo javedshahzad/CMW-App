@@ -1,0 +1,119 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end" *ngIf="action=='isAvailableOffer'">
+      <ion-button>
+        <ion-icon class="icon_right" name="ellipsis-vertical"></ion-icon>
+
+      </ion-button>
+    </ion-buttons> -->
+
+    <ion-buttons slot="end" *ngIf="action=='isRequestedOffer'" (click)="openSwap($event);">
+      <ion-button>
+        <ion-icon *ngIf="action=='isRequestedOffer'" class="icon_plus" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title  *ngIf="action=='isRequestedOffer'"  class="title_header">Swap Requests</ion-title>
+    <ion-title  *ngIf="action=='isAvailableOffer'"  class="title_header">Shift Swap</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar debounce="500" class="search_phrases" *ngIf="action==='isAvailableOffer'"  [(ngModel)]="searchfield" name="filterTextValue"
+      (ionChange)="searchAvailable($event)"></ion-searchbar>
+    <ion-searchbar debounce="500" class="search_phrases" *ngIf="action==='isRequestedOffer'"  [(ngModel)]="searchfield" name="filterTextValue"
+      (ionChange)="searchMyrequests($event)"></ion-searchbar>
+  </ion-item>
+  <ng-container *ngIf="offerList.length > 0">
+    <div class="main_item_section" *ngFor="let row of offerList">
+      <div class="header_label">
+        <ion-label class="label_section_date" *ngIf="action==='isAvailableOffer'"> {{(row.dateToWork | date: 'MM/d/y
+          EEEE')}}</ion-label>
+        <ion-label class="label_section_date" *ngIf="action==='isRequestedOffer'"> {{(!!row.acceptedBy && userId ===
+          row.acceptedBy) ? (row.dateToWork | date: 'MM/d/y EEEE') : (row.dateToSkip | date: 'MM/d/y EEEE')}}
+        </ion-label>
+      </div>
+     <div >
+        <ion-item-sliding #slidingItem>
+      <ion-card class="swap_card_sec" *ngFor="let item of row.requestsList" [ngClass]="item.statusClass">
+        <div class="main_sec" >
+         
+              <ion-item class="item_sec" (click)="redirectToSwapRequestDetail(item)">
+                <div class="time_sec">
+                  <ion-label class="text_time btmsppace">
+                    {{item.startTimeToShow}}
+                  </ion-label>
+                  <ion-label class="text_time">
+                    {{item.endTimeToShow}}
+                  </ion-label>
+                </div>
+
+                <div class="date_sec" >
+                  <ion-label class="label_date_text">
+                    <span *ngIf="action==='isAvailableOffer'">{{item.shiftToSkipNavigation.title}}</span>
+                    <span *ngIf="action==='isRequestedOffer'"> {{(!!item.acceptedBy && userId === item.acceptedBy) ?
+                      (item.shiftToSkipNavigation?.title) : (item.shiftToWorkNavigation?.title)}}</span>
+                    <span *ngIf="item.shiftToSkipNavigation.shiftCode">-{{item.shiftToSkipNavigation.shiftCode}}</span>
+                  </ion-label>
+                  <ion-label class="date_cldout">
+                    <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                    <span class="day_text" *ngIf="action=='isAvailableOffer'">{{item.dateToSkipDateStr}}</span>
+                    <!-- <span class="day_text"  *ngIf="action=='isRequestedOffer'">{{item.dateToWorkDateStr}}</span> -->
+                    <span class="day_text" *ngIf="action=='isRequestedOffer'"> {{(!!item.acceptedBy && userId ===
+                      item.acceptedBy) ? (item.dateToSkip | date: 'MM/d/y EEEE') :(item.dateToWork | date: 'MM/d/y
+                      EEEE')}}</span>
+                  </ion-label>
+                  <ion-label class="statusbtns danger" *ngIf="item.status === offerStatus.pendingMatch">
+                    <ion-icon name="flower" class="cld-icons"></ion-icon>
+                    <span class="day_text">{{item.offerStatusStr}}</span>
+                  </ion-label>
+
+                  <ion-label class="statusbtns primary" *ngIf="item.status === offerStatus.hrApproval">
+                    <ion-icon name="flower" class="cld-icons"></ion-icon>
+                    <span class="day_text">{{item.offerStatusStr}}</span>
+                  </ion-label>
+
+                  <ion-label class="statusbtns success" *ngIf="item.status === offerStatus.scheduleUpdated">
+                    <ion-icon name="flower" class="cld-icons"></ion-icon>
+                    <span class="day_text">{{item.offerStatusStr}}</span>
+                  </ion-label>
+                </div>
+                <div class="arrow_list_sec">
+                  <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+                </div>
+              </ion-item>
+
+              <ion-item-options *ngIf="action==='isAvailableOffer'" side="end" >
+                <ion-item-option class="item_expand"  (click)="onClickAccept(item)" expandable >
+                   Accept
+                </ion-item-option>
+                <!-- <button class="accept_button" (click)="openModalTerms('terms',detailsobj)"> -->
+                 
+                <!-- </button> -->
+                <!-- <button class="cancel_button outline-button" fill="outline" (click)="cancel()"> Cancel
+                    </button> -->
+              </ion-item-options>
+         
+        </div>
+      </ion-card>
+    
+    </ion-item-sliding>
+  </div>
+    </div>
+  </ng-container>
+  <div class="no_jobs" *ngIf="offerList.length==0 && isData==false">
+    <span>No data Found</span>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" *ngIf="loadmoredata" (ionInfinite)="loadData($event)" #activeJobScroll>
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

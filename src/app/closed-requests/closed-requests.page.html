@@ -1,0 +1,557 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios" class="header_sec">
+    <ion-buttons slot="start">
+      <ion-menu-button
+        class="header-icon"
+        menu="main-menu"
+        autoHide="false"
+      ></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="goToFeedback()">
+      <ion-button>
+        <ion-icon class="icon_plus" name="chatbox-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="goTOCalendarView()">
+      <ion-button>
+        <ion-icon class="icon_plus" name="calendar-clear-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header"> Closed Requests </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-grid>
+    <ion-row>
+      <ng-container>
+        <ion-col size="6" *ngFor="let menu of menuList">
+          <div class="cards_section even" (click)="switchMenu(menu.id)">
+            <ion-icon class="card_icon early_icon" [src]="menu.image"></ion-icon>
+            <ion-label class="text_avl_lbl">{{menu.label}}</ion-label>
+          </div>
+        </ion-col>
+      </ng-container>   
+    </ion-row>
+  </ion-grid> -->
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar
+      debounce="500"
+      class="search_phrases"
+      name="filterTextValue"
+      [(ngModel)]="searchfield"
+      (ionChange)="searchRequest($event)"
+    >
+    </ion-searchbar>
+  </ion-item>
+
+  <ion-item class="popup_inputs" lines="none">
+    <ion-select
+      class="select_company"
+      [interfaceOptions]="requestOptions"
+      #selectedReason
+      placeholder="Select Request Type"
+      (ionChange)="onSelectionChange($event)"
+      [ngModel]="requestType"
+    >
+      <ion-select-option
+        *ngFor="let type of offerArrayValues"
+        [value]="selectedReason.type"
+        >{{type}}</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+
+  <ng-container *ngIf="allModuleCloseList.length>0">
+    <ng-container *ngFor="let list of allModuleCloseList">
+      <!-- <ng-container *ngIf="list.offerType == 0">
+          <ion-card
+            class="swap_card_sec"
+            [ngClass]="list.status == 'success'|| list.status == 'Approved' ? 'success' : list.status == 'pending' ? 'pending': 'danger'"
+          >
+            <div class="main_sec">
+              <div class="date_sec">
+                <ion-label class="label_date_text">
+                  <span>{{list.offerTypeStr }}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{list.dateToSkipDateStr }}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{list.vtoEndTime }}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="contrast" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{list.vtoStartTime }}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="time-outline" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{list.timeTypeStr }}</span>
+                </ion-label>
+
+                <ion-label class="statusbtns success">
+                  <ion-icon name="flower" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{list.offerStatusStr }}</span>
+                </ion-label>
+              </div>
+              <div class="arrow_list_sec">
+                <ion-checkbox
+                  class="checkbox_terms"
+                  (click)="$event.stopPropagation();"
+                  slot="start"
+                  mode="md"
+                >
+                </ion-checkbox>
+              </div>
+            </div>
+          </ion-card>
+        </ng-container> -->
+
+      <ng-container *ngIf="list.offerType == 1">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Swap</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <!-- <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.dateToSkip | date: "MM/d/y EEEE" }}</span
+                >
+              </ion-label> -->
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.dateToWork | date: "MM/d/y EEEE" }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.shift?.title }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.shiftToWorkNavigation?.title }}</span
+                >
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 2">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>VOT</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.dateToWorkDateStr }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.departmentName}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="school" class="cld-icons"></ion-icon>
+                <span class="day_text"> {{list.shiftToWorkTitle}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.timeTypeStr }}</span>
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 3">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Transfer</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.createdShortDate }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.createdByShift }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.department.departmentName }}</span
+                >
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 5">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>VTO</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.dateToSkipDateStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="school" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.shiftToSkipTitle}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.departmentName}}</span>
+              </ion-label>
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 6">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Call-Off</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.dateToSkipShortDate }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text reason"
+                  >{{list.OtherReason === "" ? list.ReasonObj.name :
+                  list.OtherReason}}</span
+                >
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 7">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Early-Out</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                >{{ convertDateToSkipShortDate(list)}}</span
+                >
+              </ion-label>
+              <!-- <ion-label class="date_cldout">
+                <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.uTOHours}} Hours</span>
+              </ion-label> -->
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.shiftToSkipTitle}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.departmentName}}</span>
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 8">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Flex Work</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.dateToSkipShortDate }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="extension-puzzle" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.FlexTypestr}}</span>
+              </ion-label>
+
+              <ion-label class="date_cldout">
+                <ion-icon name="school" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.shiftToSkipTitle}}</span>
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 9">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Time-Off</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="cloud-done" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.TimeOffStartDateStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="cloud-offline" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.TimeOffEndDateStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >- {{ list.totolRequestedHoursStr | slice:0:5 }} Total
+                  Hours</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="card" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.NetBalance}}</span>
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 10">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Late-In</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.dateToSkip | date: "MM/d/y EEEE" }}</span
+                >
+              </ion-label>
+              <!-- <ion-label class="date_cldout">
+                <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.uTOHours}} Hours</span>
+              </ion-label> -->
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.shiftToSkipTitle}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.departmentName}}</span>
+              </ion-label>
+
+              <ion-label>
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 11">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>Punch Edit</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByUsername}}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="calendar-outline" class="cld-icons"></ion-icon>
+                <span class="day_text">Old Date: {{list.OldDate | date: 'dd-MM-yyyy h:mm a' }}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon
+                  name="calendar-outline"
+                  class="cld-icons"
+                ></ion-icon>
+                <span class="day_text">New Date: {{list.NewDate | date: 'dd-MM-yyyy h:mm a'}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.PunchTypeStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="school" class="cld-icons"></ion-icon>
+                <span class="day_text"> {{list.reason}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.offerStatusStr }}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="list.offerType == 0">
+        <ion-card class="swap_card_sec" [ngClass]="list.statusClass">
+          <div class="main_sec">
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>{{list.PunchTypeStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.createdByObj?.companyUsername }}</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="link" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.SourceStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="location" class="cld-icons"></ion-icon>
+                <span class="day_text"
+                  >{{list.PunchLocationStr}} | {{list.UserDistance}} Meter</span
+                >
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.ComplianceStr}}</span>
+              </ion-label>
+              <ion-label class="date_cldout">
+                <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+                <span class="day_text">{{list.PunchTimeStr}}</span>
+              </ion-label>
+            </div>
+          </div>
+        </ion-card>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <div class="no_jobs" *ngIf="allModuleCloseList.length==0 && isData==false">
+    <span>No data Found</span>
+  </div>
+  <ion-infinite-scroll
+    threshold="100px"
+    *ngIf="loadmore==true"
+    (ionInfinite)="loadData($event)"
+    #activeJobScroll
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

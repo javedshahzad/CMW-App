@@ -1,0 +1,95 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header"> Work Hours </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content">
+  <div class="main_sec" no-bounce>
+    <div class="form">
+      <form [formGroup]="userWorkHoursForm" class="list-form" *ngIf="userWorkHoursForm">
+        <!-- <ion-label class="label_date_text" style="color: red;">
+          <span>Please Select Start-date and End-date Week Wise...</span>
+        </ion-label> -->
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>Start Date</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-datetime [formControl]="userWorkHoursForm.controls['WeekStartDate']" class="login_input custom_inp"
+            name="endDate" name="from" placeholder="MM/DD/YYYY " displayFormat="MM/DD/YYYY" [max]="maxYear"
+            (onShown)="hideKey()"></ion-datetime>
+        </ion-item>
+        <app-validation-message [control]="userWorkHoursForm.controls['WeekStartDate']"
+          [messages]="messageList.WeekStartDate">
+        </app-validation-message>
+
+        <ion-item lines="none" class="popoup_label">
+          <ion-label>End Date</ion-label>
+        </ion-item>
+        <ion-item class="popup_inputs" lines="none">
+          <ion-datetime [formControl]="userWorkHoursForm.controls['WeekEndDate']" class="login_input custom_inp"
+            name="endDate" name="from" placeholder="MM/DD/YYYY " displayFormat="MM/DD/YYYY" [max]="maxYear"
+            (onShown)="hideKey()"></ion-datetime>
+        </ion-item>
+        <app-validation-message [control]="userWorkHoursForm.controls['WeekEndDate']"
+          [messages]="messageList.WeekEndDate">
+        </app-validation-message>
+      </form>
+    </div>
+    <div class="btn_sec">
+      <ion-item lines="none">
+        <ion-button class="clear_btn" (click)="showWorkHours()">Work Hours</ion-button>
+      </ion-item>
+    </div>
+    <ng-container *ngIf="userWorkHours.length>0">
+      <ng-container *ngFor="let list of userWorkHours; let i=index">
+        <ion-card class="swap_card_sec">
+          <div class="main_sec">
+            <ion-label class="label_date_text">
+              <span>Work Hours</span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text">Week #: <b>{{list.WeekNumber}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text">Regular Hours: <b>{{list.RegularWorkHours}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text">OT Hours: <b>{{list.OverTimeWorkHours}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text">PTO Hours: <b>{{list.PaidTimeOffHours}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text">Holiday Hours: <b>{{list.HolidayHours}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon class="cld-icons" [src]="overTimeIcon"></ion-icon>
+              <span class="day_text">Paycheck Regular Hours : <b>{{getSum(list)}}</b></span>
+            </ion-label>
+            <ion-label class="date_cldout">
+              <ion-icon name="logo-usd" class="cld-icons"></ion-icon>
+              <span class="day_text">Bonus Pay : <b>{{list.BonusPay}}</b></span>
+            </ion-label>
+          </div>
+        </ion-card>
+      </ng-container>
+    </ng-container>
+   
+  </div>
+  <ng-container *ngIf="userWorkHours.length==0">
+    <div class="no_jobs1" [ngClass]="{'no_jobs': isNoData}">
+      <span>No data Found</span>
+    </div>
+  </ng-container>
+</ion-content>

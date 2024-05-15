@@ -1,0 +1,286 @@
+<ion-header mode="md">
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header">VTO Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main_content">
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="VTOData">
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">VTO Request Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"> {{VTOData.vtoTypestr}} </span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isAvailableOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Department</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{VTOData.departmentName}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isAvailableOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">VTO Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{VTOData.vtoTypestr}} </span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Shift Start Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons">}</ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.dateToSkipDateStr}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Departure Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cloud-done" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.startTimeToShow}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">End Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cloud-offline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{VTOData.endTimeToShow}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="hourglass" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{VTOData.timeTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Shift</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.shiftToSkipTitle}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Approved By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">
+                {{VTOData.approvedByObj?.companyUsername}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isRequestedOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Approved Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.approvedDate| date :'short'}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isAvailableOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Available Slot</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="beaker" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{VTOData.vtoCount}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isAvailableOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Offer By</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.createdByUsername}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label" *ngIf="VTOData.action=='isAvailableOffer'">
+        <div class="popup_div">
+          <ion-label class="textlbl">Created Date</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="school" class="cld-icons"></ion-icon>
+              <span class="day_text date_span"
+                >{{VTOData.createdShortDate}}</span
+              >
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <div class="button_section">
+        <ion-item
+          class="popoup_label"
+          *ngIf="VTOData.action=='isRequestedOffer'"
+        >
+          <div class="popup_div">
+            <ion-label>Status</ion-label>
+            <div class="cal_label">
+              <ion-label
+                class="pending_lbl danger"
+                *ngIf="VTOData.status === offerStatus.rejected"
+              >
+                {{VTOData.offerStatusStr}}
+              </ion-label>
+
+              <ion-label
+                class="pending_lbl danger"
+                *ngIf="VTOData.status === offerStatus.hrApproval"
+              >
+                {{VTOData.offerStatusStr}}
+              </ion-label>
+              <ion-label
+                class="pending_lbl primary"
+                *ngIf="VTOData.status === offerStatus.proceed"
+              >
+                {{VTOData.offerStatusStr}}
+              </ion-label>
+              <ion-label
+                class="pending_lbl success"
+                *ngIf="VTOData.status === offerStatus.scheduleUpdated"
+              >
+                {{VTOData.offerStatusStr}}
+              </ion-label>
+              <ion-label
+                class="pending_lbl danger"
+                *ngIf="VTOData.status === offerStatus.expired"
+              >
+                {{VTOData.offerStatusStr}}
+              </ion-label>
+            </div>
+          </div>
+        </ion-item>
+
+        <div class="btn_sec" *ngIf="VTOData.status === offerStatus.hrApproval">
+          <div class="button_section">
+            <ion-item lines="none" class="popoup_label">
+              <div class="popup_div">
+                <ion-label>Action</ion-label>
+                <ng-container *ngIf="roleTest == role.user">
+                  <div class="cal_label">
+                    <!-- <ng-container *ngIf="VTOData.action == 'isAvailableOffer' && VTOData.status ===  offerStatus.available">
+                      <ion-button class="accept_button" (click)="acceptVtoOffer(VTOData)">Accept</ion-button>
+                    </ng-container> -->
+                    <ng-container
+                      *ngIf="VTOData.status === offerStatus.hrApproval"
+                    >
+                      <ion-button
+                        class="accept_button"
+                        (click)="openModal(VTOData)"
+                        >Edit</ion-button
+                      >
+                      <ion-button
+                        class="cancel_button outline-button"
+                        fill="outline"
+                        (click)="onClickDelete(VTOData)"
+                      >
+                        Delete</ion-button
+                      >
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </ion-item>
+          </div>
+        </div>
+
+        <div class="btn_sec" *ngIf="VTOData.action == 'isAvailableOffer'">
+          <div class="button_section">
+            <ion-item lines="none" class="popoup_label">
+              <div class="popup_div">
+                <ion-label>Action</ion-label>
+                <ng-container *ngIf="roleTest == role.user">
+                  <div class="cal_label">
+                    <ng-container
+                      *ngIf="VTOData.action == 'isAvailableOffer' && VTOData.status ===  offerStatus.available"
+                    >
+                      <ion-button
+                        class="accept_button"
+                        (click)="acceptVtoOffer(VTOData)"
+                        >Accept</ion-button
+                      >
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,57 @@
+
+.radio_role {
+    float: left;
+    width: 20px;
+    margin-top: 3px;
+    // margin-right: 1%;
+    --border-color: rgb(0 0 0 / 30%);
+    --background: #fff;
+    margin-right:10px;
+  }
+  .role_item {
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px 10px 0px 10px;
+
+  }
+  .role {
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: left;
+    margin: 5px auto 10px 0;
+    display: inline-block;
+    //line-height: 18px;
+  }
+  .role_radio_label {
+    font-size: 15px !important;
+    color: #383838;
+    float: left;
+    width: 88%;
+    font-weight: 600;
+    // margin-left: 8px;
+    margin-left: 0px;
+  }
+
+  .save_button {    
+      --background: #265CB2;
+  --border-radius: 50px;
+  width: 100%;
+  min-height: 48px;
+  padding-left: 5px;
+  padding-right: 23px;
+  font-family: "Poppins";
+  }
+
+  
+
+.allow-user-heading {
+    font-family: Poppins !important;
+    font-weight: 600;
+    color: #265CB2 !important;
+    font-size: 14px !important;
+    text-align: center;
+}
+
+.login_role_card {
+    padding: 15px 20px;
+}

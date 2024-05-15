@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="avaliable-title">Available Locations</ion-title>
+    <ion-buttons style="width: 8%;" slot="end" (click)="closeModal()">
+      <ion-icon name="close" class="add-btn"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="map-container">
+    <div class="map-frame">
+      <div id="map" leaflet></div>
+    </div>
+  </div>
+</ion-content>

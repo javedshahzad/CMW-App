@@ -1,0 +1,74 @@
+.main_sec{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6% !important;
+}
+
+ion-select{
+    --padding-start:16px !important;
+    font-family: 'Poppins' !important;
+}
+
+.search_head{
+    max-height: 55px !important;
+}
+
+.terms-title{
+    font-family: Poppins !important;
+    font-weight: 600;
+    color: #265CB2 !important;
+    font-size: 16px !important;
+}
+
+.search_head.header-md::after, .menuheader.header-ios::after{ background-image:none; }
+.btn_sec{
+    margin-top: 1%;
+}
+
+.save_btn{
+    margin-right: 10px
+}
+.cncl_btn{
+    margin-left: 10px;
+}
+
+.save_button{
+    --background: #265CB2;
+    --border-radius: 50px;
+    width:110px;
+    height: 27px;
+    font-weight: 100;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    // margin-left: 54%;
+}
+
+.cancel_button{
+    --background: #f8fafc;
+    --border-radius: 50px;
+    color:  #265CB2;
+    width:110px;
+    height: 27px;
+    font-weight: 500;
+    font-family: "Poppins";
+    font-size: 12px;
+    text-transform: none;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.main_sec{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6% !important;
+}
+
+.footer_sec{
+    background-color: #fff !important;
+    padding-bottom: 15px;
+}

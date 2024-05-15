@@ -1,0 +1,44 @@
+<form [formGroup]="transferApproveForm" class="product-add-from" role="form" novalidate  >
+  <div class="add_transfer_approve_modal">
+      <div class="modal-header">
+          <h4 class="modal-title pull-left"> Approve Transfer Request</h4>
+          <button type="button" class="close pull-right" aria-label="Close" [disabled]="!isDisableBtn" (click)="cancel()">
+              <span aria-hidden="true"><ion-icon name="close-circle-outline"></ion-icon></span>
+          </button>
+      </div>
+      <div class="modal-body pb-3 add_transfer_approval_popup">
+          <div class="row">
+              <div class="col-12">
+                  <div class="form-group">
+                      <label>Start Date</label>
+                      
+                          <!-- <input type="text" class="form-control" name="endDate" placeholder="MM-DD-YYYY" bsDatepicker
+                          formControlName="startDate" name="from" [minDate]="minDate" [maxDate]="maxDate"
+                          (bsValueChange)="workDateChange($event)" [daysDisabled]="disableDaysForDateToWork"
+                          [bsConfig]="bsConfig" readonly/> -->
+
+                          <ng-container>
+                              <input type="text" class="form-control" name="endDate" placeholder="MM-DD-YYYY" bsDatepicker
+                                  (bsValueChange)="skipDateChange($event)" formControlName="startDate" name="from"
+                                  [minDate]="tomorrow" [bsConfig]="bsConfig" readonly />
+                          </ng-container>
+                         
+
+                          <app-validation-message [control]="transferApproveForm.controls['startDate']" [messages]="messageList.startDate">
+                          </app-validation-message>
+                      </div>
+                  </div>
+              </div>    
+              
+          </div>
+          <div class="modal-footer grpBtn">
+              <button (click)="onSubmit()" type="submit" tabindex="-1" [disabled]="!isDisableBtn" class="btn btn-primary float-left depBtn">
+                 Approve
+              </button>
+                  <button type="button" class="btn btn-primary ml-2 depBtn" [disabled]="!isDisableBtn" (click)="cancel()"> Cancel </button>
+              </div>
+          </div>
+          <div>
+            <ion-label *ngIf="!isDisableBtn" for="username" class="col-12 col-form-label process-btn submit-btn">Processing... </ion-label>
+          </div>
+      </form>

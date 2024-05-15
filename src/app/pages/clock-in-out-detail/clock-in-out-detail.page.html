@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="title_header">Clock In Out Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="login_card swap">
+    <div class="main_sec" no-bounce *ngIf="clockInOutData">
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Punch Time</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="calendar" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{clockInOutData.PunchTimeStr}}</span>
+            </ion-label>
+          </div>
+        </div>  
+      </ion-item>
+    
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Punch Type</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{clockInOutData.PunchTypeStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Punch Location</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{clockInOutData.PunchLocationStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Source</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="cash-outline" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{clockInOutData.SourceStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item class="popoup_label">
+        <div class="popup_div">
+          <ion-label class="textlbl">Compliance</ion-label>
+          <div class="cal_label">
+            <ion-label class="icon_label">
+              <ion-icon name="document-text" class="cld-icons"></ion-icon>
+              <span class="day_text date_span">{{clockInOutData.ComplianceStr}}</span>
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+
+      <div class="btn_sec" *ngIf="clockInOutData.Status === offerStatus.pendingMatch">
+        <div class="button_section">
+          <ion-item lines="none" class="popoup_label">
+            <div class="popup_div">
+              <ion-label>Action</ion-label>
+
+              <ng-container>
+                <div class="cal_label">
+                  <ion-button class="accept_button" (click)="openModal(clockInOutData)">Edit</ion-button>
+                  <ion-button class="cancel_button outline-button" fill="outline" (click)="onClickDelete(clockInOutData)">
+                    Delete</ion-button>
+                </div>
+              </ng-container>
+
+            </div>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

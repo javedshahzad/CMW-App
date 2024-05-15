@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar class="header_sec mains" mode="ios">
+    <ion-buttons slot="start" (click)="goBack();">
+      <ion-button>
+        <ion-icon class="back_icon" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="action=='isRequestedOffer'" class="title_header">My Flex Work</ion-title>
+    <ion-title  *ngIf="action=='isAvailableOffer'" class="title_header">Flex Work</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item class="search_sect" lines="none">
+    <ion-searchbar debounce="500" class="search_phrases" name="filterTextValue" [(ngModel)]="searchfield"
+      (ionChange)="searchRequest($event)">
+    </ion-searchbar>
+  </ion-item>
+  <ng-container *ngIf="flexRequestList.length > 0 && action!='isRequestedOffer'">
+    <div class="list_sec" *ngFor="let e of flexRequestList">
+      <ion-item-sliding #slidingItem>
+        <ion-card class="swap_card_sec" [ngClass]="e.statusClass">
+          <div class="main_sec">
+            <ion-item class="item_sec" (click)="goToFlexDetail(e)">
+              <div class="status_line" [ngClass]="e.statusClass"></div>
+              <div class="time_sec">
+                <ion-label class="label_date_text time">{{e.timeTypeStr}}</ion-label>
+                <ion-label class="text_time btmsppace" *ngIf="e.vtoStartTime!=null">
+                  {{e.startTimeToShow}}
+                </ion-label>
+                <ion-label class="text_time" *ngIf="e.vtoEndTime!=null">
+                  {{e.endTimeToShow}}
+                </ion-label>
+              </div>
+              <div class="date_sec">
+                <ion-label class="label_date_text">
+                  <span>{{e.dateToSkipDateStr}}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="file-tray" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.departmentName}}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="extension-puzzle" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.FlexTypestr}}</span>
+                </ion-label>
+
+                <ion-label class="date_cldout">
+                  <ion-icon name="school" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.shiftToSkipTitle}}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="accessibility" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.vtoCount}}</span>
+                </ion-label>
+                <ion-label class="date_cldout">
+                  <ion-icon name="person-circle" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.createdByUsername}}</span>
+                </ion-label>
+
+                <ion-label class="statusbtns primary" *ngIf="e.status === offerStatus.available">
+                  <ion-icon name="flower" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.offerStatusStr}}</span>
+                </ion-label>
+
+                <ion-label class="statusbtns success" *ngIf="e.status === offerStatus.proceed">
+                  <ion-icon name="flower" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.offerStatusStr}}</span>
+                </ion-label>
+                <ion-label class="statusbtns danger" *ngIf="e.status === offerStatus.expired">
+                  <ion-icon name="flower" class="cld-icons"></ion-icon>
+                  <span class="day_text">{{e.offerStatusStr}}</span>
+                </ion-label>
+              </div>
+              <div class="arrow_list_sec">
+                <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+              </div>
+            </ion-item>
+          </div>
+          <ion-item-options side="end">
+            <ion-item-option class="item_expand" (click)="onClickAccept(e)" expandable>
+              Accept
+            </ion-item-option>
+          </ion-item-options>
+        </ion-card>
+      </ion-item-sliding>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="flexRequestList.length > 0 && action=='isRequestedOffer'">
+    <div class="list_sec" *ngFor="let e of flexRequestList">
+
+      <ion-card class="swap_card_sec" [ngClass]="e.statusClass">
+        <div class="main_sec" (click)="goToFlexDetail(e)">
+          <ion-item class="item_sec">
+            <div class="status_line" [ngClass]="e.statusClass"></div>
+            <div class="time_sec">
+              <ion-label class="label_date_text time">{{e.timeTypeStr}}</ion-label>
+              <ion-label class="text_time btmsppace" *ngIf="e.vtoStartTime!=null">
+                {{e.startTimeToShow}}
+              </ion-label>
+              <ion-label class="text_time" *ngIf="e.vtoEndTime!=null">
+                {{e.endTimeToShow}}
+              </ion-label>
+            </div>
+            <div class="date_sec">
+              <ion-label class="label_date_text">
+                <span>{{e.dateToSkipDateStr}}</span>
+              </ion-label>
+
+              <ion-label class="date_cldout">
+                <ion-icon name="extension-puzzle" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.FlexTypestr}}</span>
+              </ion-label>
+
+              <ion-label class="date_cldout">
+                <ion-icon name="school" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.shiftToSkipTitle}}</span>
+              </ion-label>
+              <ion-label class="statusbtns primary" *ngIf="e.status === offerStatus.available">
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.offerStatusStr}}</span>
+              </ion-label>
+
+              <ion-label class="statusbtns success" *ngIf="e.status === offerStatus.accepted">
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.offerStatusStr}}</span>
+              </ion-label>
+              <ion-label class="statusbtns primary" *ngIf="e.status === offerStatus.proceed">
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.offerStatusStr}}</span>
+              </ion-label>
+              <ion-label class="statusbtns danger" *ngIf="e.status === offerStatus.expired">
+                <ion-icon name="flower" class="cld-icons"></ion-icon>
+                <span class="day_text">{{e.offerStatusStr}}</span>
+              </ion-label>
+
+
+            </div>
+            <div class="arrow_list_sec">
+              <ion-icon name="chevron-forward" class="arrow_sec"></ion-icon>
+            </div>
+          </ion-item>
+        </div>
+      </ion-card>
+    </div>
+
+  </ng-container>
+  <div class="no_jobs" *ngIf="flexRequestList.length==0">
+    <span>No data Found</span>
+  </div>
+  <ion-infinite-scroll threshold="100px" *ngIf="loadmore==true" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

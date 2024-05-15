@@ -1,0 +1,103 @@
+.card_icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.transfer_icon {
+  color: #000;
+}
+.early_icon {
+  color: #000;
+}
+.back_icon {
+  color: #fff !important;
+}
+.dollar_icon{
+  color: #fff !important;
+  font-size: 31px;
+  // margin-bottom: 2px;
+}
+.cards_section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0px 0px 7px rgb(0 0 0 / 15%);
+  background: #ffffff;
+  margin: 5px 5px 0px 5px;
+}
+.text_avl_lbl {
+  font-size: 13px;
+  font-family: Poppins;
+  color: #265cb2 !important;
+  font-weight: 600;
+  text-align: center;
+}
+.text_lbl{
+  font-size: 15px;
+  font-family: Poppins;
+  color: black !important;
+  font-weight: 600;
+  text-align: center;
+}
+.text_lbl_mtr{
+  font-size: 15px;
+  font-family: Poppins;
+  font-weight: 600;
+  text-align: center;
+}
+.lbl_mtr{
+  margin-left: 5px;
+}
+.column_main {
+  padding-right: 0px !important;
+}
+.instuction{
+  padding-top: 0;
+}
+@media (max-width: 575.98px) {
+  // .text_avl_lbl{
+  //     font-size: 12px;
+
+  // }
+  .cards_section {
+    padding: 12px;
+  }
+  // .title_header{
+  //     font-size: 14px;
+  // }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 340px) {
+  .title_header {
+    font-size: 14px !important;
+  }
+  .text_avl_lbl {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .cards_section {
+    min-height: 121px !important;
+  }
+  .transfer_icon {
+    font-size: 40px;
+  }
+  .text_avl_lbl {
+    font-size: 21px;
+  }
+}
+@media (min-width: 600px) and (max-width: 767px) {
+  .cards_section {
+    min-height: 121px !important;
+  }
+  .transfer_icon {
+    font-size: 35px;
+  }
+  .text_avl_lbl {
+    font-size: 20px;
+  }
+}
+
+

@@ -1,0 +1,126 @@
+#logn_text{
+    font-size: 18px;
+}
+.checkbox_terms{
+    float: left;
+    width: 20px;
+    margin-top: 3px;
+}
+.terms_condition_item{
+    width: 92%;
+    margin: 0 auto;
+}
+.terms{
+    width:100%;
+    justify-content: space-evenly;
+    text-align: left;
+    margin: 5px auto 10px 0; 
+    display: inline-block;
+    line-height: 18px;
+    
+}
+#term{
+    font-size: 14px !important;
+    color: #383838;
+    float: left;
+    width: 88%;
+    font-weight:600;
+    margin-left: 8px;
+}
+
+ion-checkbox{
+    --size:20px;
+}
+
+.form_header{
+   color: #265CB2;
+   font-family: Poppins;
+   font-size: 18px;
+   font-weight: 600;
+   text-align: center;
+}
+
+.readonly_input{
+    --background:#e9ecef;
+}
+
+.profile_inputs{
+    width:94%;
+    margin-bottom: 8px !important;
+    --min-height: 10px !important;
+}
+
+.label_item{
+    width: 100%;
+}
+
+ion-item.input_space{
+    margin-bottom: 0px !important;
+    --highlight-height: 0;
+    margin: 0 auto;
+    --padding-start: 20px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 95%;
+}
+
+.select_input_space{
+    margin-bottom: 8px !important;
+    --highlight-height: 0;
+    margin: 0 auto;
+    --padding-start: 20px !important;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0px 0px 4px rgba(113, 113, 113, 0.2);
+    border-radius: 6px;
+    width: 95%;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    #term { width: 93%;}
+    
+}
+@media (min-width: 768px) and (max-width: 1199.98px) { 
+    #term { width: 95%;
+    font-size: 18px !important;
+    }
+}
+
+
+@media only screen 
+and (min-device-width: 360px) 
+and (max-device-width: 375px) 
+{
+    
+    .terms_conditions{
+        position: absolute;
+        bottom: 3%;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        padding: 0 2%;
+        font-size: 15px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) { 
+.terms{
+    display: flex !important;
+    line-height: 18px;
+    align-items: center;
+}
+.checkbox_terms{
+    width: 25px !important;
+    height: 25px !important;
+}
+}
+@media (min-width: 600px) and (max-width: 767px) { 
+    .terms{
+        display: flex !important;
+        line-height: 18px;
+        align-items: center;
+    }
+    .checkbox_terms{
+        width: 25px !important;
+        height: 25px !important;
+    }
+    }
