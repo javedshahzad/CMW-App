@@ -139,7 +139,9 @@ export class LoginPage implements OnInit {
       this.isFaceId = false;
     }
     if(this.IsLogoutFromDasboard === "false" && this.IsEnabledBiometric === "true") {
+     setTimeout(() => {
       this.showFingeerprintAuthentication();
+     }, 2000);
     }
     //   if(localStorage.getItem(Constants.API_URL)){
     //   if(localStorage.getItem(Constants.API_URL)!="0"){

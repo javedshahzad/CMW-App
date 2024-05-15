@@ -3,8 +3,6 @@ import { MenuController, AlertController, Platform } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Constants, DeviceTypeEnum } from './constant/constants';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { UtilityService } from './services/utility/utility.service';
 import { EventsService } from './services/events/events.service';
 import { AuthService } from './services/auth/auth.service';
@@ -14,6 +12,9 @@ import { UserService } from './services/user/user.service';
 import { userRoleSubject } from './services/userRoleSubject.service';
 import { FingerprintAIO ,FingerprintOptions} from '@ionic-native/fingerprint-aio/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { FcmService } from './services/fcm.service';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { BackgroundColorOptions, StatusBar, Style } from '@capacitor/status-bar';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -64,9 +65,6 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private router: Router,
-    private location: Location,
-    private statusBar: StatusBar,
-    private splashScreen: SplashScreen,
     private utility: UtilityService,
     private events: EventsService,
     private authService: AuthService,
@@ -78,7 +76,8 @@ export class AppComponent {
     private userSubjectService: userRoleSubject,
     private faio: FingerprintAIO,
     private utilityService: UtilityService,
-    private appVersion: AppVersion
+    private appVersion: AppVersion,
+    private fcmSr:FcmService
   ) {
     localStorage.setItem('canCheckFingerPrint',"true");
     this.userSubjectService.getUserRole().subscribe((userId) => {
@@ -192,7 +191,7 @@ export class AppComponent {
 }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       localStorage.setItem("IsLogoutFromDasboard","false");
       // let userData = localStorage.getItem("AAT_User");
       // if (userData != null || userData != undefined) {
@@ -202,7 +201,11 @@ export class AppComponent {
       // else {
       //   this.router.navigate(["/tabs/login"])
       // }
-
+      this.fcmSr.initPush();
+      await StatusBar.setStyle({ style: Style.Light });
+      setTimeout(async () => {
+        await SplashScreen.hide();
+      }, 2000);
       this.deepLinks.route({}).subscribe(
         (match) => {
           console.log('===', match.$link);
@@ -227,54 +230,15 @@ export class AppComponent {
           }
         }
       );
-      this.statusBar.styleDefault();
+      ;
 
-      // check for plateform (ios or android)
-      // if (this.platform.is('ios')) {
-      //   this.deviceTypeId = 2;
-
-      //   if(!!this.fcm){
-      //     this.fcm.requestPushPermission().then((context) => {
-      //       this.fcm.getToken().then((token) => {
-      //         localStorage.setItem(Constants.DEVICETOKEN, token);
-      //         console.log(token, 'token.');
-      //         console.log(this.deviceTypeId, 'devicetype');
-      //       });
-      //     });
-      //   }
-      //   // data['IsIosDevice'] = true
-      // } else {
-      //   // data['IsIosDevice'] = false
-      //   this.deviceTypeId = 1;
-
-      //   if(!!this.fcm){
-      //     this.fcm.getToken().then((token) => {
-      //       localStorage.setItem(Constants.DEVICETOKEN, token);
-      //       console.log(token, 'token.');
-      //       console.log(this.deviceTypeId, 'devicetype');
-      //     });
-      //   }
-      // }
-      // console.log(this.deviceTypeId, 'devicetype');
-      // localStorage.setItem(Constants.DEVICETYPE, this.deviceTypeId);
-
-      // this.fcm.onNotification().subscribe((data) => {
-      //   console.log(data);
-      //   if (data.wasTapped) {
-      //     console.log('Received in background');
-      //   } else {
-      //     this.utility.showSuccessToast(data.body);
-      //     console.log('Received in foreground');
-      //   }
-      // });
-
-      // this.fcm.hasPermission().then((hasPermission) => {
-      //   if (hasPermission) {
-      //     console.log('Has permission!');
-      //   }
-      // });
-
-      // this.fcm.clearAllNotifications();
+      //check for plateform (ios or android)
+      if (this.platform.is('ios')) {
+        this.deviceTypeId = 2;
+      } else {
+        this.deviceTypeId = 1;
+      }
+      localStorage.setItem(Constants.DEVICETYPE, this.deviceTypeId);
       this.platform.backButton.subscribeWithPriority(1, () => {
         console.log('currentUrl ', this.router.url);
         if (
