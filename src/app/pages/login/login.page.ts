@@ -79,7 +79,6 @@ export class LoginPage implements OnInit {
   showCompanyName: boolean = false;
   isChangeCompany: boolean = false;
   fingerPrintCompanyId: any;
-  isFingerPrint: boolean = true;
   BiometricCheck: any = false;
   validationChecker: any;
   IsEnabledBiometric: string;
@@ -115,6 +114,7 @@ export class LoginPage implements OnInit {
   ionViewWillEnter() {
     this.IsEnabledBiometric = localStorage.getItem('IsEnabledBiometric') ? localStorage.getItem('IsEnabledBiometric') : "";
     this.IsLogoutFromDasboard = localStorage.getItem('IsLogoutFromDasboard') ? localStorage.getItem('IsLogoutFromDasboard') : "";
+    var companyId = localStorage.getItem(Constants.APPCOMPANYID) ? localStorage.getItem(Constants.APPCOMPANYID) : "";
     if (this.activeRoute.snapshot.queryParams.session == 'invalid') {
       localStorage.setItem('canCheckFingerPrint', 'false');
     }
@@ -128,9 +128,6 @@ export class LoginPage implements OnInit {
     }
     if (localStorage.getItem('password')) {
       this.password = localStorage.getItem('password');
-      // if (this.password != null || this.password != undefined) {
-      //   this.isPasswordAvailable = true;
-      // }
     }
 
     if (this.platform.is('ios')) {
@@ -143,18 +140,8 @@ export class LoginPage implements OnInit {
       this.showFingeerprintAuthentication();
      }, 2000);
     }
-    //   if(localStorage.getItem(Constants.API_URL)){
-    //   if(localStorage.getItem(Constants.API_URL)!="0"){
-    //     this.api_url = localStorage.getItem(Constants.API_URL)
-    //   }
-    //   else{
-    //     localStorage.setItem(Constants.API_URL,environment.APP_URL)
-    //   }
-    // }
-
     localStorage.setItem(Constants.API_URL, environment.APP_URL);
-    // }
-    // this.getCompanyList();
+    this.getCompanyList();
     this.userCompanyName = localStorage.getItem(Constants.COMPANY_NAME);
     if (!!this.userCompanyName) {
       this.showCompanyName = true;
@@ -163,181 +150,60 @@ export class LoginPage implements OnInit {
     this.formInit();
   }
 
-  getCompanyList(userName) {
-    if (!navigator.onLine) {
-      return this.utilityService.showErrorToast(Constants.OFFLINE_MSG);
-    }
+  getCompanyList() {
+    return new Promise((resolve) => {
+      if (!navigator.onLine) {
+        return this.utilityService.showErrorToast(Constants.OFFLINE_MSG);
+      }
     this.utilityService.showLoading();
-    this.companyService.getUserCompanyList(userName).then(
+    this.companyService.getCompanyListWithOutPagination().then(
       (res) => {
-        this.isFingerPrint = false;
+        console.log(res)
         if (res['Success']) {
           this.utilityService.hideLoading();
           this.companyList = res['Data'];
-          // if (Number(localStorage.getItem(Constants.APPCOMPANYID))) {
-          //   this.signInForm.controls.companyId.setValue(
-          //     Number(localStorage.getItem(Constants.APPCOMPANYID))
-          //   );
-          // }
-          if (this.changeCompany == false) {
-            this.companyList = res['Data'];
-          }
-          let selectedUserName = localStorage.getItem(Constants.USERNAME);
-          let selectedCompanyId = localStorage.getItem(
-            Constants.RETURNING_COMPANYID
-          );
           localStorage.setItem(
             'password',
             encodeURIComponent(this.signInForm.controls.password.value)
           );
-          if (res['Data'] == null) {
-            if (this.isFingerPrint == false) {
-              this.utilityService.showErrorToast(
-                Constants.VALIDATION_MSG.SIGN_UP.USER_INVALID
-              );
-              return;
-            }
-          }
-          if (res['Data'].length > 1) {
-            if (
-              selectedUserName ==
-                this.signInForm.controls.companyUserName.value &&
-              selectedCompanyId != null
-            ) {
-              if (this.changeCompany == false) {
-                this.userCompanyId = this.signInForm.controls.companyId.value;
-              } else {
-                if (
-                  this.changeCompany == true &&
-                  this.signInForm.controls.companyId.value != 0
-                ) {
-                  this.userCompanyId = this.signInForm.controls.companyId.value;
-                } else {
-                  this.userCompanyId = selectedCompanyId;
-                }
-              }
-            } else if (
-              selectedUserName ==
-                this.signInForm.controls.companyUserName.value &&
-              selectedCompanyId == this.signInForm.controls.companyId.value &&
-              this.changeCompany == false
-            ) {
-              this.userCompanyId = this.signInForm.controls.companyId.value;
-            } else {
-              this.isMultiple = true;
-              this.userCompanyId = this.signInForm.controls.companyId.value;
-            }
-            localStorage.setItem(Constants.COMPANYID, this.userCompanyId);
-          }
-          if (res['Data'].length == 1) {
-            this.isMultiple = false;
-            this.userCompanyId = this.companyList[0].companyId;
-            if (this.changeCompany == false) {
-              this.isMultiple = true;
-            }
-            localStorage.setItem(
-              Constants.COMPANYID,
-              this.companyList[0].companyId
-            );
-          }
-
-          if (this.changeCompany == true) {
-            const userData =
-              'username=' +
-              encodeURIComponent(
-                this.signInForm.controls.companyUserName.value
-              ) +
-              '&password=' +
-              encodeURIComponent(this.signInForm.controls.password.value) +
-              '&grant_type=password' +
-              '&companyId=' +
-              this.userCompanyId +
-              '&isMobile=' +
-              true;
-            this.loginApiCall(userData);
-          }
-          if (!!this.companyName) {
-            const index = this.companyList.findIndex(
-              (x) =>
-                x.companyName.toLowerCase() === this.companyName.toLowerCase()
-            );
-            // if (index !== -1) {
-            //   this.companyId = this.companyList[index].companyId;
-            //   this.isShowCompany = !!this.companyId ? false : true;
-            //   this.signInForm.controls.companyId.setValue(this.companyId);
-            //   sessionStorage.setItem(Constants.COMPANY_NAME, this.companyName);
-            //   this.companyList.map((e)=>{
-            //     if(e.companyId==this.companyId){
-            //       if(e.AppUrl!=null){
-            //         localStorage.setItem(Constants.API_URL,e.AppUrl);
-            //         }
-            //         else{
-            //           localStorage.setItem(Constants.API_URL,'0');
-            //           return this.utilityService.showErrorToast("Backend server is not configured, please contact admin person")
-            //         }
-            //     }
-            //   })
-            // } else {
-            //   this.isShowCompany = true;
-            //   // this.utilityService.showErrorToast(Constants.COMPANY_NOT_EXIST_MSG);
-            //   sessionStorage.clear();
-            // }
+          localStorage.setItem(Constants.COMPANYID, this.signInForm.controls.companyId.value);
+            const index = this.companyList.findIndex((x) =>x.companyId === Number(this.signInForm.controls.companyId.value) );
+              console.log(index)
             if (index !== -1) {
               this.companyId = this.companyList[index].companyId;
               this.AppCompanyId = this.companyList[index].AppCompanyId;
-              this.isShowCompany = !!this.companyId ? false : true;
               this.signInForm.controls.companyId.setValue(this.companyId);
               sessionStorage.setItem(Constants.COMPANY_NAME, this.companyName);
               this.companyList.map((e) => {
                 if (e.AppCompanyId == this.AppCompanyId) {
                   if (e.AppUrl != null) {
                     localStorage.setItem(Constants.API_URL, e.AppUrl);
-                  } else {
-                    localStorage.setItem(Constants.API_URL, '0');
-                    return this.utilityService.showErrorToast(
-                      'Backend server is not configured, please contact admin person'
-                    );
                   }
                 }
               });
-            } else {
-              this.isShowCompany = true;
-              // this.utilityService.showErrorToast(Constants.COMPANY_NOT_EXIST_MSG);
-              sessionStorage.clear();
             }
-          } else {
-            this.isShowCompany = true;
-            sessionStorage.clear();
-          }
-        } else {
-          if (this.companyApiCallCounter < 10) {
-            setTimeout(() => {
-              this.getCompanyList(userName);
-            }, 5000);
-            this.companyApiCallCounter++;
-          }
-          // this.utilityService.hideLoading();
-          this.companyList = [];
-          sessionStorage.clear();
-        }
+            resolve(true)
+          } 
       },
       (err) => {
         if (this.companyApiCallCounter < 10) {
           setTimeout(() => {
-            this.getCompanyList(userName);
+            this.getCompanyList();
           }, 5000);
           this.companyApiCallCounter++;
         }
-        // this.utilityService.hideLoading();
+        this.utilityService.hideLoading();
         this.companyList = [];
         sessionStorage.clear();
-      }
-    );
+        resolve(true)
+      });
+  });
   }
 
   formInit() {
+    var companyId = localStorage.getItem(Constants.APPCOMPANYID) ? localStorage.getItem(Constants.APPCOMPANYID) : "";
     this.signInForm = this.fb.group({
-      companyId: [''],
+      companyId: [companyId ? companyId : ''],
       companyUserName: new FormControl(!!this.userName ? this.userName : '', [
         Validators.required,
       ]),
@@ -408,68 +274,57 @@ export class LoginPage implements OnInit {
   }
 
   changeUserCompany(userName) {
-    this.isMultiple = true;
-    this.changeCompany = false;
-    this.getCompanyList(userName);
+    this.isChangeCompany = false;
   }
 
   signIn() {
     this.formService.markFormGroupTouched(this.signInForm);
     this.changeCompany = true;
     this.isSubmitted = true;
-    this.getCompanyList(this.signInForm.controls.companyUserName.value);
-    if (this.signInForm.invalid) {
-      if (!this.isBiometric) {
-        if (
-          this.signInForm.controls.companyId.invalid ||
-          this.signInForm.controls.companyUserName.invalid
-        ) {
-          return;
+       if (this.signInForm.invalid) {
+      Object.keys(this.signInForm.controls).forEach(key => {
+        if (this.signInForm.controls[key].invalid) {
+          this.signInForm.controls[key].markAsTouched({ onlySelf: true });
         }
-      } else {
-        return;
-      }
+      });
+      return;
     }
-    if (localStorage.getItem(Constants.API_URL) == '0') {
-      return this.utilityService.showErrorToast(
-        'Backend server is not configured, please contact admin person'
-      );
-    }
-    //localStorage.clear();
-    localStorage.removeItem('configuredUserName');
-    localStorage.removeItem('password');
-    this.signInForm.controls.companyId.setValue(
-      Number(localStorage.getItem(Constants.COMPANYID))
-    );
-    if (this.isAvailable) {
-      this.signInForm.controls.password.setValue(
-        decodeURIComponent(localStorage.getItem('password'))
-      );
-      if (
-        this.signInForm.controls.companyUserName.value !=
-        localStorage.getItem(Constants.USERNAME)
-      ) {
-        this.signInForm.controls.password.setValue('');
-      }
-      this.isAvailable = false;
-    }
-
     if (!navigator.onLine) {
       return this.utilityService.showErrorToast(Constants.OFFLINE_MSG);
     }
+    const formPassword = this.signInForm.controls.password.value;
+    const formUsername = this.signInForm.controls.companyUserName.value;
+    const companyId = Number(this.signInForm.controls.companyId.value);
+    this.IsEnabledBiometric = localStorage.getItem('IsEnabledBiometric') ? localStorage.getItem('IsEnabledBiometric') : "";
+      const userData =
+        'username=' +
+        formUsername +
+        '&password=' +
+        formPassword +
+        '&grant_type=password' +
+        '&companyId=' +
+        companyId +
+        '&isMobile=' +
+        false;
+      this.loginApiCall(userData);
+
   }
   loginApiCall(userData, isUserConfigured = false) {
     this.utilityService.showLoading();
     this.authService.login(userData).then(
       (res: any) => {
+        console.log(res)
         if (res) {
           this.utilityService.hideLoading();
           localStorage.setItem(Constants.TOKEN, res.access_token);
           this.utilityService.showLoading();
           this.authService.getUserData().then(
-            (res) => {
+            async (res) => {
+              console.log(res)
               if (res['Success']) {
+                localStorage.setItem(Constants.APPCOMPANYID, this.signInForm.controls.companyId.value);
                 this.utilityService.hideLoading();
+                let list = await this.getCompanyList()
                 this.companyList.forEach((item) => {
                   if (item.companyId == res['Data'].companyId) {
                     localStorage.setItem(
@@ -483,7 +338,6 @@ export class LoginPage implements OnInit {
                   }
                 });
                 localStorage.setItem(Constants.USERNAME, res['Data'].userName);
-
                 // localStorage.setItem(Constants.COMPANYID, res['Data'].companyId);
                 if (
                   res['Data'].companyId !=
@@ -565,16 +419,11 @@ export class LoginPage implements OnInit {
                   Constants.IS_CLOCK_IN_OUT,
                   !!res['Data'].isCheckInOut ? res['Data'].isCheckInOut : false
                 );
-                // this.userModalOrRedirect(
-                //   res['Data'].isAllowAsAUser,
-                //   res['Data'].roleId
-                // );
                 this.userRoleSubjectService.setUserRole(
                   parseInt(res['Data'].roleId)
                 );
                 this.events.publish('IS_LOGIN', true);
                 this.registerUser();
-                // this.router.navigate([defaultRoutes[res['Data'].roleId]]);
                 this.companyList.map((e) => {
                   if (e.AppCompanyId == res['Data'].companyId) {
                     localStorage.setItem(Constants.COMPANY_NAME, e.companyName);
@@ -629,12 +478,9 @@ export class LoginPage implements OnInit {
         }
       },
       (err) => {
+        console.log(err)
         this.utilityService.hideLoading();
-        if (this.isFingerPrint == false) {
-          this.utilityService.showErrorToast(
-            Constants.VALIDATION_MSG.CHECK_CREDENTIALS
-          );
-        } else if (!this.validationChecker) {
+     if (!this.validationChecker) {
           this.utilityService.showErrorToast(
             Constants.VALIDATION_MSG.CHECK_CREDENTIALS
           );
@@ -644,10 +490,10 @@ export class LoginPage implements OnInit {
             Constants.VALIDATION_MSG.CHECK_CREDENTIALS
           );
         }
-        // this.signInForm.controls.password.setValue('');
-        this.signInForm.controls.companyId.setValue('');
-        //this.userModalOrRedirect(roleId);
-        localStorage.removeItem('configuredUserName');
+        // // this.signInForm.controls.password.setValue('');
+        // this.signInForm.controls.companyId.setValue('');
+        // //this.userModalOrRedirect(roleId);
+        // localStorage.removeItem('configuredUserName');
       }
     );
   }
@@ -753,17 +599,14 @@ export class LoginPage implements OnInit {
   }
 
   getCompany(event: any) {
-    localStorage.setItem(Constants.APPCOMPANYID, event.detail.value);
     this.companyList.map((e: any) => {
-      if (e.companyId == event.detail.value) {
+      if (e.companyId == Number(event.detail.value)) {
         localStorage.setItem(Constants.COMPANYID, e.AppCompanyId);
         if (e.AppUrl != null) {
           localStorage.setItem(Constants.API_URL, e.AppUrl);
         } else {
           localStorage.setItem(Constants.API_URL, '0');
-          return this.utilityService.showErrorToast(
-            'Backend server is not configured, please contact admin person'
-          );
+          return;
         }
       }
     });
@@ -817,114 +660,6 @@ export class LoginPage implements OnInit {
       this.router.navigate([defaultRoutes[roleCount[0]]]);
     }
   }
-  // loginFaceID(){
-
-  //   const opt: FingerprintOptions = {
-  //     title: 'Fingerprint - FaceID authentication',
-  //     subtitle: "It's quick and easy",
-  //     description: '',
-  //     fallbackButtonTitle: 'Use Pin',
-  //     cancelButtonTitle: 'Cancel',
-  //     disableBackup: false
-  //   }
-  //   this.faio.show(opt)
-  //     .then((result) => {
-  //       console.log(result)
-  //       // What should I do here ???
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-
-  // }
-
-  async configureFingerPrint() {
-    this.BiometricCheck = true;
-    localStorage.setItem('BiometricCheck', this.BiometricCheck);
-    this.formService.markFormGroupTouched(this.signInForm);
-    if (this.signInForm.invalid) {
-      if (
-        this.signInForm.controls.companyId.invalid ||
-        this.signInForm.controls.companyUserName.invalid
-      ) {
-        return;
-      }
-    }
-    if (localStorage.getItem(Constants.API_URL) == '0') {
-      return this.utilityService.showErrorToast(
-        'Backend server is not configured, please contact admin person'
-      );
-    }
-    localStorage.setItem(
-      'configuredUserName',
-      this.signInForm.controls.companyUserName.value
-    );
-    localStorage.setItem(
-      'password',
-      encodeURIComponent(this.signInForm.controls.password.value)
-    );
-    await this.companyService
-      .getUserCompanyList(this.signInForm.controls.companyUserName.value)
-      .then((res: any) => {
-        this.isFingerPrint = true;
-        if (
-          this.signInForm.controls.companyId.value == '' ||
-          this.signInForm.controls.companyId.value == null
-        ) {
-          if (res['Data'] == null) {
-            this.validationChecker = res['Data'];
-            if (this.isFingerPrint == true) {
-              this.validationChecker = true;
-              this.utilityService.showErrorToast(
-                Constants.VALIDATION_MSG.SIGN_UP.USER_INVALID
-              );
-              return;
-            }
-            return;
-          }
-          if (res['Data'].length == 1) {
-            this.fingerPrintCompanyId = res['Data'][0].companyId;
-            localStorage.setItem(
-              Constants.COMPANY_NAME,
-              res['Data'][0].companyName
-            );
-            localStorage.setItem(
-              Constants.RETURNING_COMPANYID,
-              this.fingerPrintCompanyId
-            );
-          } else if (res['Data'].length > 1) {
-            if (!!localStorage.getItem(Constants.RETURNING_COMPANYID)) {
-              this.isMultiple = false;
-              this.fingerPrintCompanyId = localStorage.getItem(
-                Constants.RETURNING_COMPANYID
-              );
-            } else {
-              this.isMultiple = true;
-              this.companyList = res['Data'];
-            }
-          }
-        }
-        if (
-          res['Data'].length > 1 &&
-          !!this.signInForm.controls.companyId.value
-        ) {
-          this.fingerPrintCompanyId = this.signInForm.controls.companyId.value;
-        }
-      });
-    localStorage.setItem(Constants.COMPANYID, this.fingerPrintCompanyId);
-    const userData =
-      'username=' +
-      encodeURIComponent(this.signInForm.controls.companyUserName.value) +
-      '&password=' +
-      encodeURIComponent(this.signInForm.controls.password.value) +
-      '&grant_type=password' +
-      '&companyId=' +
-      this.fingerPrintCompanyId +
-      '&isMobile=' +
-      true;
-    this.loginApiCall(userData, true);
-  }
-
   userNameChange() {
     this.isMultiple = false;
     this.signInForm.patchValue({
@@ -933,56 +668,43 @@ export class LoginPage implements OnInit {
   }
 
   public showFingeerprintAuthentication() {
-    const password = localStorage.getItem('password');
-    if (!!password) {
+    if (this.signInForm.invalid) {
+      Object.keys(this.signInForm.controls).forEach(key => {
+        if (this.signInForm.controls[key].invalid) {
+          this.signInForm.controls[key].markAsTouched({ onlySelf: true });
+        }
+      });
+      return;
+    }
       this.faio
         .isAvailable()
         .then(() => {
           this.faio
             .show({
-              cancelButtonTitle: 'Cancel',
-              disableBackup: true,
-              title: 'CoverMyWork',
-              fallbackButtonTitle: 'FB Back Button',
+                    cancelButtonTitle: 'Cancel',
+                    description: "Biometric authrization",
+                    disableBackup: true,
+                    title: 'CoverMyWork',
+                    fallbackButtonTitle: 'FB Back Button',
             })
             .then(() => {
-              const userName = encodeURIComponent(
-                localStorage.getItem('configuredUserName')
-              );
               const formPassword = this.signInForm.controls.password.value;
-              const formUsername =
-                this.signInForm.controls.companyUserName.value;
-              if (
-                formUsername !== userName &&
-                userName == 'null' &&
-                formPassword === ''
-              ) {
-                this.utilityService.showErrorToast(
-                  'Provided username is not configured for auto login. Enter password for username to re-configure auto login.',
-                  5000
-                );
-                return;
-              }
-              if (!!this.signInForm.controls.password.value) {
-                this.configureFingerPrint();
-              } else {
-                localStorage.setItem(
-                  Constants.COMPANYID,
-                  localStorage.getItem(Constants.RETURNING_COMPANYID)
-                );
+              const formUsername = this.signInForm.controls.companyUserName.value;
+              const companyId = this.signInForm.controls.companyId.value;
                 this.isBiometric = false;
+                localStorage.setItem("IsEnabledBiometric","true");
+                this.IsEnabledBiometric = localStorage.getItem('IsEnabledBiometric') ? localStorage.getItem('IsEnabledBiometric') : "";
                 const userData =
                   'username=' +
                   formUsername +
                   '&password=' +
-                  localStorage.getItem('password') +
+                  formPassword +
                   '&grant_type=password' +
                   '&companyId=' +
-                  localStorage.getItem(Constants.RETURNING_COMPANYID) +
+                  companyId +
                   '&isMobile=' +
                   true;
                 this.loginApiCall(userData);
-              }
             })
             .catch((error) => {
               console.log(error);
@@ -1022,11 +744,5 @@ export class LoginPage implements OnInit {
             5000
           );
         });
-    } else {
-      // faceId not configured
-      this.faio.isAvailable().then(() => {
-        this.configureFingerPrint();
-      });
     }
-  }
 }

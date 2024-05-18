@@ -37,14 +37,15 @@
       <app-validation-message [control]="signInForm.controls['password']" [messages]="messageList.password">
       </app-validation-message>
 
-      <ion-item class="section_inputs" *ngIf="isMultiple"
+      <ion-item class="section_inputs" *ngIf="!isChangeCompany"
         [ngClass]="{'input_space': isSubmitted && this.signInForm.controls.companyId.errors }" lines="none">
-        <ion-select class="select_company" placeholder="Select Company" formControlName="companyId"
+        <ion-input type="tel" class="login_input" placeholder="Company ID" formControlName="companyId" (ionChange)="getCompany($event)"></ion-input>
+        <!-- <ion-select class="select_company" placeholder="Select Company" formControlName="companyId"
           (ionChange)="getCompany($event)">
           <ion-select-option disabled value=''>Select Company</ion-select-option>
           <ion-select-option *ngFor="let company of companyList" [value]="company.companyId">{{company.companyName}}
           </ion-select-option>
-        </ion-select>
+        </ion-select> -->
       </ion-item>
       <app-validation-message [control]="signInForm.controls['companyId']" [messages]="messageList.companyId">
       </app-validation-message>
