@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.covermywork.stage',
+  appId: 'com.covermywork.prod',
   appName: 'coverMyWork',
   webDir: 'www',
   plugins: {

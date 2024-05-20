@@ -265,7 +265,9 @@ export class LoginPage implements OnInit {
   formInit() {
     var companyId = localStorage.getItem(Constants.APPCOMPANYID) ? localStorage.getItem(Constants.APPCOMPANYID) : "";
     this.signInForm = this.fb.group({
-      companyId: [companyId ? companyId : ''],
+      companyId:new FormControl(!!companyId ? companyId : '', [
+        Validators.required,
+      ]),
       companyUserName: new FormControl(!!this.userName ? this.userName : '', [
         Validators.required,
       ]),
@@ -338,6 +340,14 @@ export class LoginPage implements OnInit {
 
   async signIn() {
     this.formService.markFormGroupTouched(this.signInForm);
+    if (this.signInForm.invalid) {
+      Object.keys(this.signInForm.controls).forEach(key => {
+        if (this.signInForm.controls[key].invalid) {
+          this.signInForm.controls[key].markAsTouched({ onlySelf: true });
+        }
+      });
+      return;
+    }
     this.changeCompany = true;
     this.isSubmitted = true;
      this.getCompanyList(this.signInForm.controls.companyUserName.value);
@@ -727,6 +737,8 @@ export class LoginPage implements OnInit {
                     fallbackButtonTitle: 'FB Back Button',
             })
             .then(() => {
+              setTimeout(() => {
+                this.getCompanyList(this.signInForm.controls.companyUserName.value);
               const formPassword = this.signInForm.controls.password.value;
               const formUsername = this.signInForm.controls.companyUserName.value;
               const companyId = this.signInForm.controls.companyId.value;
@@ -735,15 +747,16 @@ export class LoginPage implements OnInit {
                 this.IsEnabledBiometric = localStorage.getItem('IsEnabledBiometric') ? localStorage.getItem('IsEnabledBiometric') : "";
                 const userData =
                   'username=' +
-                  formUsername +
+                  encodeURIComponent(formUsername) +
                   '&password=' +
-                  formPassword +
+                  encodeURIComponent(formPassword) +
                   '&grant_type=password' +
                   '&companyId=' +
                   companyId +
                   '&isMobile=' +
                   true;
                 this.loginApiCall(userData);
+              }, 1500);
             })
             .catch((error) => {
               console.log(error);
